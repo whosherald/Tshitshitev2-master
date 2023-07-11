@@ -26,14 +26,11 @@ class MemberCaptureController extends Controller
      */
     public function index()
     {
-        // Session::flush();request()->session()->regenerateToken();
+        // Session::flush();
+        // request()->session()->regenerateToken();
         // Session::forget('currentSection');
         if(Session::get('formCompleted') == true){
-            Session::flush();
             request()->session()->regenerateToken();
-
-            //delete maim-member from inprogress if the id exists
-
         }
 
         //Initialisation
@@ -90,8 +87,7 @@ class MemberCaptureController extends Controller
         if ($mainMemberId !='false') {
             //section 1
             $mainMember = $mainMember = DB::table('main_member')->where('mm_id', $mainMemberId)->first();
-            $saleRepId= Session::get('saleRepId');
-            $saleRep = DB::table('sales_representative')->where('sales_rep_id', $mainMemberId)->first();
+            $saleRep = DB::table('sales_representative')->where('sales_rep_id', $mainMember->sales_rep_id)->first();
 
             if($mainMember){$sectionOne=true;}
             else{$sectionOne=false;}
@@ -172,6 +168,17 @@ class MemberCaptureController extends Controller
             // Store mainMemberId in session
             // Retrieve the mainMemberId from the database
             $mainMemberId = DB::table('main_member')->where('sales_rep_id', $saleRep->sales_rep_id)->value('mm_id');
+
+            //making it to be in progress by default
+            $inProgress = In_Progress_Model::where('form', 'member-capture')->where('main_member_id', $mainMemberId)->first();
+            if (!$inProgress) {
+                $inProgress = new In_Progress_Model();
+                $inProgress->fill([
+                    'main_member_id' => $mainMemberId,
+                    'form' => 'member-capture'
+                ]);
+                $inProgress->save();
+            }
 
             Session::put('mainMemberId', $mainMemberId);
             Session::put('saleRepId', $saleRep->sales_rep_id);
@@ -263,6 +270,7 @@ class MemberCaptureController extends Controller
         if ($section === 'section5') {
             // Process section 5 data
             $section=5;
+            Session::put('nextState', $nextState);
             $currentPaymentMethod=Session::get('currentPayment');
             $newPaymentMethod=null;
             $oldPaymentMethodDeleted= false;
@@ -337,6 +345,7 @@ class MemberCaptureController extends Controller
                 'input' => $input,
                 'paymentMethod' => $paymentMethod,
                 'oldPaymentMethodDeleted' => $oldPaymentMethodDeleted,
+                'nextState' => $nextState,
             ];
 
             return response()->json($response);
@@ -349,10 +358,26 @@ class MemberCaptureController extends Controller
             // Process section 7 data
             $section=7;
             if($nextState == 1){
-                $completedProgressMembers = new Complete_Progress_Model();
-                $completedProgressMembers->fill($mainMemberId);
-                $completedProgressMembers->save();
+                $mainMemberIdExists = Complete_Progress_Model::where('form', 'member-capture')->where('main_member_id', $mainMemberId)->exists();
+
+                if (!$mainMemberIdExists) {
+                    $completedProgressMembers = new Complete_Progress_Model();
+                    $completedProgressMembers->fill([
+                                                        'main_member_id' => $mainMemberId,
+                                                        'form' => 'member-capture'
+                                                    ]);
+                    $completedProgressMembers->save();
+                }
+                In_Progress_Model::where('main_member_id', $mainMemberId)->delete();
+                Session::flush();
                 Session::put('formCompleted', true);
+                $response = [
+                    'message' => 'Data saved for section ' . $section,
+                    'section' => $section,
+                    'input' => $input,
+                    'nextState' => $nextState,
+                ];
+                return response()->json($response);
             }
         }
 
@@ -463,8 +488,8 @@ class MemberCaptureController extends Controller
         if ($section === 'section1') {
             // Process section 1 data
             $section=1;
-            // $saleRep = DB::table('sales_representative')->where('sales_rep_id', $saleRepId)->first();
-            $saleRep = Sale_Rep_Model::find($saleRepId);
+            $mainMember = Main_Member::find($mainMemberId);
+            $saleRep = Sale_Rep_Model::find($mainMember->sales_rep_id);
 
             if ($saleRep) {
                 // $input1 = array_intersect_key($input, (array) $saleRep);
@@ -475,8 +500,6 @@ class MemberCaptureController extends Controller
                 $saleRep->update($input1);
             }
 
-            // $mainMember = DB::table('main_member')->where('sales_rep_id', $saleRepId)->first();
-            $mainMember = Main_Member::where('sales_rep_id', $saleRepId)->first();
             if ($mainMember) {
                 // $input2 = array_intersect_key($input, (array) $mainMember);
                 $input2 = array_filter($input, function ($value, $key) use ($mainMember) {
@@ -605,8 +628,8 @@ class MemberCaptureController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-     public function destroy($id)
-     {
+    public function destroy($id)
+    {
         // Delete the resource from Capturing_Extended_Member_Model if it exists
         $extendedMember = Capturing_Extended_Member_Model::find($id);
         if ($extendedMember) {
@@ -622,7 +645,6 @@ class MemberCaptureController extends Controller
         // Redirect back to the member-capture page with a flash message
         return redirect('/member-capture')->with('flash_message', 'Data deleted successfully');
     }
-
 
     public function checkMainMemberId(Request $request)
     {
@@ -698,27 +720,13 @@ class MemberCaptureController extends Controller
 
     public function inProgress(Request $request)
     {
-        $mainMemberId = Session::get('mainMemberId');
-        if ($mainMemberId) {
-            $inProgress = In_Progress_Model::where('main_member_id', $mainMemberId)->first();
+        Session::flush();
+        request()->session()->regenerateToken();
 
-            if (!$inProgress) {
-                $inProgress = new In_Progress_Model();
-                $inProgress->fill(['main_member_id' => $mainMemberId]);
-                $inProgress->save();
-            }
-
-            Session::flush();
-            request()->session()->regenerateToken();
-
-            $response = [
-                'mainMemberId' => $mainMemberId,
-                'inProgress' => $inProgress,
-            ];
-            return response()->json($response);
-        } else {
-            return response()->json(['error' => 'Main member ID not found'], 400);
-        }
+        $response = [
+            'message' => "done",
+        ];
+        return response()->json($response);
     }
 
 }

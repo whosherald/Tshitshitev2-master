@@ -62,76 +62,13 @@
                         </div>
                         <!-- end row -->
 
-
-                        <div class="row" style="padding: 2em 0.5em; border: 1px solid black; width: 99%">
-                            <table id="inProgressTable" class="table table-striped" style="width:100%">
-                                <thead>
-                                  <tr>
-                                    <th>No#</th>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>ID Number</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  @foreach($inProgressMainMembers as $index => $inProgressMainMember)
-                                  <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $inProgressMainMember->fullname }}</td>
-                                    <td>{{ $inProgressMainMember->surname }}</td>
-                                    <td>{{ $inProgressMainMember->id_number }}</td>
-                                    <td>
-                                        <a href="/dashboard/{{ $inProgressMainMember->mm_id }}/edit" class="btn btn-outline-info btn-sm edit" title="Edit">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMember({{ $inProgressMainMember->mm_id }})">
-                                            <i class="fa fa-trash fa-lg"></i>
-                                        </button>
-                                    </td>
-                                  </tr>
-                                  @endforeach
-                                </tbody>
-                                <tfoot>
-                                  <tr>
-                                    <th>No#</th>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>ID Number</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </tfoot>
-                            </table>
-                            <script>
-
-                                function deleteMember(memberId) {
-                                  fetch('/dashboard/' + memberId, {
-                                    method: 'POST',
-                                    headers: {
-                                      'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                      'Content-Type': 'application/x-www-form-urlencoded'
-                                    },
-                                    body: 'section=3&_method=DELETE'
-                                  })
-                                  .then(function(response) {
-                                    if (response.ok) {
-                                      // Success! Refresh the page or update the UI as needed
-                                      location.reload();
-                                    } else {
-                                      // Error handling
-                                      console.log('Delete request failed with status:', response.status);
-                                    }
-                                  })
-                                  .catch(function(error) {
-                                    console.log('Delete request error:', error);
-                                  });
-                                }
-                            </script>
-
-                        </div>
                         <!-- end row -->
-                        <div class="row" style="padding: 2em 0.5em; border: 1px solid black; width: 99%">
-                            <table id="completeProgressTable" class="table table-striped" style="width:100%">
+                        <div class="row" style="padding: 1em 0.5em; border: 1px solid black; width: 99%">
+                            <h4 style=" color: black">Member Capture Forms Completed</h4>
+                            <div style=" margin-bottom:0.5em; color: black">
+                                <hr>
+                            </div>
+                            <table id="member_capture_completeProgressTable" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No#</th>
@@ -142,17 +79,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($completeProgressMainMembers as $index => $completeProgressMainMember)
+                                    @foreach($memberCapture_CompletedForm_MainMembers as $index => $memberCapture_CompletedForm_MainMember)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $completeProgressMainMember->fullname }}</td>
-                                        <td>{{ $completeProgressMainMember->surname }}</td>
-                                        <td>{{ $completeProgressMainMember->id_number }}</td>
+                                        <td>{{ $memberCapture_CompletedForm_MainMember->fullname }}</td>
+                                        <td>{{ $memberCapture_CompletedForm_MainMember->surname }}</td>
+                                        <td>{{ $memberCapture_CompletedForm_MainMember->id_number }}</td>
                                         <td>
-                                            <a href="/dashboard/{{ $completeProgressMainMember->mm_id }}/edit" class="btn btn-outline-info btn-sm edit" title="Edit">
+                                            <a href="/dashboard/{{ $memberCapture_CompletedForm_MainMember->mm_id }}/edit" class="btn btn-outline-info btn-sm edit" title="Edit">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMember({{ $completeProgressMainMember->mm_id }})">
+                                            {{-- @if($claims_CompletedForm_MainMembers->contains('mm_id', $memberCapture_CompletedForm_MainMember->mm_id) || $claims_InProgressForm_MainMembers->contains('mm_id', $memberCapture_CompletedForm_MainMember->mm_id)) --}}
+                                                <button type="button" class="btn btn-sm btn-success show-confirm action" onclick="claimPageCompletedForm({{ $memberCapture_CompletedForm_MainMember->mm_id }})">
+                                                    Claims
+                                                </button>
+                                            {{-- @endif --}}
+                                            <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMemberForm('member-capture '+{{ $memberCapture_CompletedForm_MainMember->mm_id }})">
                                                 <i class="fa fa-trash fa-lg"></i>
                                             </button>
                                         </td>
@@ -169,200 +111,142 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <script>
-                                function deleteMember(memberId) {
-                                    fetch('/dashboard/' + memberId, {
-                                        method: 'POST',
-                                        headers: {
-                                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                            'Content-Type': 'application/x-www-form-urlencoded'
-                                        },
-                                        body: 'section=3&_method=DELETE'
-                                    })
-                                    .then(function(response) {
-                                        if (response.ok) {
-                                            // Success! Refresh the page or update the UI as needed
-                                            location.reload();
-                                        } else {
-                                            // Error handling
-                                            console.log('Delete request failed with status:', response.status);
-                                        }
-                                    })
-                                    .catch(function(error) {
-                                        console.log('Delete request error:', error);
-                                    });
-                                }
-                            </script>
+
+                        </div>
+                        <div class="row" style="padding: 1em 0.5em; border: 1px solid black; width: 99%">
+                            <h4 style="color: black">Member Capture Forms In Progress</h4>
+                            <div style=" margin-bottom:0.5em; color: black">
+                                <hr>
+                            </div>
+                            <table id="member_capture_inProgressTable" class="table table-striped" style="width:100%">
+                                <thead>
+                                  <tr>
+                                    <th>No#</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
+                                    <th>ID Number</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($memberCapture_InProgressForm_MainMembers as $index => $memberCapture_InProgressForm_MainMember)
+                                  <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $memberCapture_InProgressForm_MainMember->fullname }}</td>
+                                    <td>{{ $memberCapture_InProgressForm_MainMember->surname }}</td>
+                                    <td>{{ $memberCapture_InProgressForm_MainMember->id_number }}</td>
+                                    <td>
+                                        <a href="/dashboard/{{ $memberCapture_InProgressForm_MainMember->mm_id }}/edit" class="btn btn-outline-info btn-sm edit" title="Edit">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMemberForm('member-capture '+{{ $memberCapture_InProgressForm_MainMember->mm_id }})">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                    </td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                                <tfoot>
+                                  <tr>
+                                    <th>No#</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
+                                    <th>ID Number</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </tfoot>
+                            </table>
+
                         </div>
 
+                        <div class="row" style="padding: 1em 0.5em; border: 1px solid black; width: 99%">
+                            <h4 style=" color: black">Claims Forms Completed</h4>
+                            <div style=" margin-bottom:0.5em; color: black">
+                                <hr>
+                            </div>
+                            <table id="claims_completeProgressTable" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No#</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>ID Number</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($claims_CompletedForm_MainMembers as $index => $claims_CompletedForm_MainMember)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $claims_CompletedForm_MainMember->fullname }}</td>
+                                        <td>{{ $claims_CompletedForm_MainMember->surname }}</td>
+                                        <td>{{ $claims_CompletedForm_MainMember->id_number }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-success show-confirm action" onclick="claimPageCompletedForm({{ $claims_CompletedForm_MainMember->mm_id }})">
+                                                Edit Claims
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMemberForm('claims '+{{ $claims_CompletedForm_MainMember->mm_id }})">
+                                                <i class="fa fa-trash fa-lg"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>No#</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>ID Number</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
 
-                        <div class="row">
-                            <div class="col-xl-7">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Inbox</h4>
-
-                                            <div class="inbox-widget slimscroll" style="max-height: 324px;">
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-1.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Chadengle</p>
-                                                        <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                        <p class="inbox-item-date">13:40 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-2.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Tomaslau</p>
-                                                        <p class="inbox-item-text text-truncate">I've finished it! See you so...</p>
-                                                        <p class="inbox-item-date">13:34 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-3.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Stillnotdavid</p>
-                                                        <p class="inbox-item-text">This theme is awesome!</p>
-                                                        <p class="inbox-item-date">13:17 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-4.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Kurafire</p>
-                                                        <p class="inbox-item-text">Nice to meet you</p>
-                                                        <p class="inbox-item-date">12:20 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-5.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Shahedk</p>
-                                                        <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                        <p class="inbox-item-date">10:15 AM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-6.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Adhamdannaway</p>
-                                                        <p class="inbox-item-text">This theme is awesome!</p>
-                                                        <p class="inbox-item-date">9:56 AM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-8.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Arashasghari</p>
-                                                        <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                        <p class="inbox-item-date">10:15 AM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img src="assets/images/users/avatar-9.jpg" class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Joshaustin</p>
-                                                        <p class="inbox-item-text">I've finished it! See you so...</p>
-                                                        <p class="inbox-item-date">9:56 AM</p>
-                                                    </div>
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Sales Statistics</h4>
-
-                                            <p class="font-weight-semibold mb-3">iMacs <span class="text-danger float-right"><b>78%</b></span></p>
-                                            <div class="progress" style="height: 10px;">
-                                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="78"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Monthly Sales</h4>
-
-                                            <p class="font-weight-semibold mb-2">Macbooks <span class="text-success float-right"><b>25%</b></span></p>
-                                            <div class="progress" style="height: 10px;">
-                                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Daily Sales</h4>
-
-                                            <p class="font-weight-semibold mb-2">Mobiles <span class="text-warning float-right"><b>75%</b></span></p>
-                                            <div class="progress" style="height: 10px;">
-                                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div><!-- end col-->
-
-                            <div class="col-xl-5">
-                                <div class="card-box">
-
-                                    <h4 class="header-title mb-3">Top Contracts</h4>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-nowrap mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Company</th>
-                                                    <th>Start Date</th>
-                                                    <th>End Date</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th class="text-muted">Apple Technology</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">Paid</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-muted">Envato Pty Ltd.</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-danger">Unpaid</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-muted">Dribbble LLC.</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">Paid</span></td>
-                                                </tr>
-                                            <tr>
-                                                    <th class="text-muted">Adobe Family</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">Paid</span></td>
-                                                </tr>
-                                            <tr>
-                                                    <th class="text-muted">Apple Technology</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-danger">Unpaid</span></td>
-                                                </tr>
-                                            <tr>
-                                                    <th class="text-muted">Envato Pty Ltd.</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">Paid</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div><!-- end col-->
+                        </div>
+                        <div class="row" style="padding: 1em 0.5em; border: 1px solid black; width: 99%">
+                            <h4 style="color: black">Claims Forms In Progress</h4>
+                            <div style=" margin-bottom:0.5em; color: black">
+                                <hr>
+                            </div>
+                            <table id="claims_inProgressTable" class="table table-striped" style="width:100%">
+                                <thead>
+                                  <tr>
+                                    <th>No#</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
+                                    <th>ID Number</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($claims_InProgressForm_MainMembers as $index => $claims_InProgressForm_MainMember)
+                                  <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $claims_InProgressForm_MainMember->fullname }}</td>
+                                    <td>{{ $claims_InProgressForm_MainMember->surname }}</td>
+                                    <td>{{ $claims_InProgressForm_MainMember->id_number }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMemberForm('claims '+{{ $claims_InProgressForm_MainMember->mm_id }})">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-success show-confirm action" onclick="claimPageCompletedForm({{ $claims_InProgressForm_MainMember->mm_id }})">
+                                            Edit Claims
+                                        </button>
+                                    </td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                                <tfoot>
+                                  <tr>
+                                    <th>No#</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
+                                    <th>ID Number</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </tfoot>
+                            </table>
 
                         </div>
                         <!-- end row -->
@@ -371,8 +255,60 @@
 
                     <!-- DataTables CSS -->
                     <script>
-                        console.log("inProgressMainMembers", <?php echo json_encode($inProgressMainMembers); ?>)
-                        console.log("completeProgressMainMembers", <?php echo json_encode($completeProgressMainMembers); ?>)
+                        console.log("memberCapture_CompletedForm_MainMembers", <?php echo json_encode($memberCapture_CompletedForm_MainMembers); ?>)
+                        console.log("memberCapture_InProgressForm_MainMembers", <?php echo json_encode($memberCapture_InProgressForm_MainMembers); ?>)
+                        console.log("claims_CompletedForm_MainMembers", <?php echo json_encode($claims_CompletedForm_MainMembers); ?>)
+                        console.log("claims_InProgressForm_MainMembers", <?php echo json_encode($claims_InProgressForm_MainMembers); ?>)
+
+                        function deleteMemberForm(form_Id) {
+                            fetch('/dashboard/' + form_Id, {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                                        section: 3,
+                                                        _method: 'DELETE'
+                                                    })
+                            })
+                            .then(async function (response) {  // Add the 'async' keyword here
+                                if (response.ok) {
+                                    // Success! Refresh the page or update the UI as needed
+                                    const data = await response.json();
+                                    console.log("form_Id result", data);
+                                    // location.reload();
+                                } else {
+                                    // Error handling
+                                    console.log('Delete request failed with status:', response.status);
+                                }
+                                })
+                                .catch(function (error) {
+                                console.log('Delete request error:', error);
+                            });
+                        }
+
+                        function claimPageCompletedForm(memberId) {
+                            fetch('/dashboard/claims/' + memberId, {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                }
+                            })
+                            .then(async function (response) {  // Add the 'async' keyword here
+                                if (response.ok) {
+                                    // Redirect or handle successful response
+                                    window.location.href = '/member-claim';
+                                } else {
+                                    throw new Error('Request error: ' + response.status);
+                                }
+                            })
+                            .catch(error => {
+                                console.log('Delete request error:', error);
+                            });
+                        }
+
                     </script>
 
                 </div> <!-- end content -->

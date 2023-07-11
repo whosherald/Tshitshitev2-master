@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Complete_Progress_Model extends Model
 {
     protected $table = 'completed_form';
-    protected $primaryKey = 'cp_id';
+    protected $primaryKey = 'cf_id';
     public $timestamps = false;
-    protected $fillable = ['main_member_id'];
+    protected $fillable = ['main_member_id',
+                            'form',
+                        ];
 }

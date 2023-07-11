@@ -429,8 +429,6 @@
                                 </a>
                             </li>
 
-
-
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-flip-horizontal"></i>
@@ -439,7 +437,7 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="{{('/member-capture')}}">member capture</a></li>
-                                    <li><a href="{{('/member-captures')}}">member captures</a></li>
+                                    <li><a href="{{('/member-capture')}}">member captures</a></li>
 
                                 </ul>
                             </li>
@@ -463,21 +461,18 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="pages-timeline.html">policy payments</a></li>
-                                    <li><a href="pages-invoice.html">Group Payments</a></li>
-                                    <li><a href="pages-pricing.html">Other Payments</a></li>
-                                    <li><a href="pages-gallery.html">member payments</a></li>
-                                    <li><a href="pages-maintenance.html">Debit Oredr</a></li>
+                                    <li><a href="{{('/policy-payments')}}">policy payments</a></li>
 
                                 </ul>
-
+                            </li>
+                            <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-format-underline"></i>
                                     <span> Claim </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="ui-buttons.html">Member Claims</a></li>
+                                    <li><a href="{{('/member-claim')}}">Member Claims</a></li>
                                     <li><a href="ui-cards.html">Claims Logged</a></li>
 
                                 </ul>
@@ -543,8 +538,10 @@
         <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
-                $('#inProgressTable').DataTable();
-                $('#completeProgressTable').DataTable();
+                $('#member_capture_completeProgressTable').DataTable();
+                $('#member_capture_inProgressTable').DataTable();
+                $('#claims_completeProgressTable').DataTable();
+                $('#claims_inProgressTable').DataTable();
             });
         </script>
 

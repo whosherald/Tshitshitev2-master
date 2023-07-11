@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberCaptureController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClaimsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +23,8 @@ Route::get('/', function () {
 //     return view('Admin.dashboard');
 // });
 Route::resource("/dashboard", DashboardController::class);
+Route::post('/dashboard/claims/{id}', [DashboardController::class, 'claims']);
+
 Route::get('/member-captures', function () {
     return view('forms.member_captures');
 });
@@ -38,3 +42,7 @@ Route::put('/member-capture/{id}', [MemberCaptureController::class, 'update']);
 Route::post('/check-main-member-id', [MemberCaptureController::class, 'checkMainMemberId']);
 Route::post('/in-progress', [MemberCaptureController::class, 'inProgress']);
 
+Route::get('/policy-payments', [AdminController::class, 'policy_payments']);
+
+Route::resource("/member-claim", ClaimsController::class);
+Route::post('/check-main-member-id-claim', [ClaimsController::class, 'checkMainMemberId']);

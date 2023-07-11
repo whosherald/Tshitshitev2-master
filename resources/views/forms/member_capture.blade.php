@@ -23,80 +23,8 @@
         <link href="assets/libs/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+        <link href="assets/css/member-capture.css" rel="stylesheet"/>
     </head>
-
-    <style>
-
-        #regForm {
-          background-color: #ffffff;
-          margin: 100px auto;
-          font-family: Raleway;
-          padding: 40px;
-          width: 70%;
-          min-width: 300px;
-        }
-
-        h1 {
-          text-align: center;
-        }
-
-        input {
-          padding: 10px;
-          width: 100%;
-          font-size: 17px;
-          font-family: Raleway;
-          border: 1px solid #aaaaaa;
-        }
-
-        /* Mark input boxes that gets an error on validation: */
-        input.invalid {
-          background-color: #ffdddd;
-        }
-
-        /* Hide all steps by default: */
-        .tab {
-          display: none;
-        }
-
-        button {
-          background-color: #04AA6D;
-          color: #ffffff;
-          border: none;
-          padding: 10px 20px;
-          font-size: 17px;
-          font-family: Raleway;
-          cursor: pointer;
-        }
-
-        button:hover {
-          opacity: 0.8;
-        }
-
-        #prevBtn {
-          background-color: #bbbbbb;
-        }
-
-        /* Make circles that indicate the steps of the form: */
-        .step {
-          height: 15px;
-          width: 15px;
-          margin: 0 2px;
-          background-color: #bbbbbb;
-          border: none;
-          border-radius: 50%;
-          display: inline-block;
-          opacity: 0.5;
-        }
-
-        .step.active {
-          opacity: 1;
-        }
-
-        /* Mark the steps that are finished and valid: */
-        .step.finish {
-          background-color: #04AA6D;
-        }
-    </style>
 
     <body>
 
@@ -104,20 +32,31 @@
         <div id="wrapper">
             <!-- Topbar Start -->
             <div class="navbar-custom">
-                <ul class="list-unstyled topnav-menu float-right mb-0">
+                <div class="logo-box" style="background: none">
+                    <a href="index.html" class="logo text-center logo-dark">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo.png" alt="" height="55"style="margin-top:-3px">
+                            <!-- <span class="logo-lg-text-dark">Uplon</span> -->
+                        </span>
+                        <span class="logo-sm">
+                            <!-- <span class="logo-lg-text-dark">U</span> -->
+                            <img src="assets/images/logo-sm.png" alt="" height="20">
+                        </span>
+                    </a>
 
-                    <li class="dropdown notification-list dropdown d-none d-lg-inline-block ml-2">
+                    <a href="index.html" class="logo text-center logo-light">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-light.png" alt="" height="22">
+                            <!-- <span class="logo-lg-text-dark">Uplon</span> -->
+                        </span>
+                        <span class="logo-sm">
+                            <!-- <span class="logo-lg-text-dark">U</span> -->
+                            <img src="assets/images/logo-sm-light.png" alt="" height="24">
+                        </span>
+                    </a>
+                </div>
 
-                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/germany.jpg" alt="lang-image" class="mr-1" height="12"> <span
-                                    class="align-middle">German</span>
-                            </a>
-
-                        </div>
-                    </li>
-
+                <ul class="list-unstyled topnav-menu float-right mb-0 topbar-navigation">
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="mdi mdi-bell-outline noti-icon"></i>
@@ -141,7 +80,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-success">
-                                        <i class="mdi mdi-settings-outline"></i>
+                                        <i class="mdi mdi-settings-outline" style="color:white"></i>
                                     </div>
                                     <p class="notify-details">New settings
                                         <small class="text-muted">There are new settings available</small>
@@ -153,7 +92,7 @@
                             <!-- All-->
                             <a href="javascript:void(0);" class="dropdown-item text-primary notify-item notify-all">
                                 View all
-                                <i class="fi-arrow-right"></i>
+                                <i class="fi-arrow-right" style="color:white"></i>
                             </a>
 
                         </div>
@@ -193,7 +132,7 @@
                             <!-- All-->
                             <a href="javascript:void(0);" class="dropdown-item text-primary notify-item notify-all">
                                 View all
-                                <i class="fi-arrow-right"></i>
+                                <i class="fi-arrow-right" style="color:white"></i>
                             </a>
 
                         </div>
@@ -202,8 +141,8 @@
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                            <span class="d-none d-sm-inline-block ml-1 font-weight-medium">Alex M.</span>
-                            <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                            <span class="d-none d-sm-inline-block ml-1 font-weight-medium" style="color: black">Alex M.</span>
+                            <i class="mdi mdi-chevron-down d-none d-sm-inline-block"  ></i>
                         </a>
 
                         {{-- profile icon menu --}}
@@ -251,29 +190,7 @@
                 </ul>
 
                 <!-- LOGO -->
-                <div class="logo-box">
-                    <a href="index.html" class="logo text-center logo-dark">
-                        <span class="logo-lg" style="background-color:#3d74f1">
-                            <img src="assets/images/logo.png" alt="" height="65"style="margin-top:-3px">
-                            <!-- <span class="logo-lg-text-dark">Uplon</span> -->
-                        </span>
-                        <span class="logo-sm">
-                            <!-- <span class="logo-lg-text-dark">U</span> -->
-                            <img src="assets/images/logo-sm.png" alt="" height="24">
-                        </span>
-                    </a>
 
-                    <a href="index.html" class="logo text-center logo-light">
-                        <span class="logo-lg">
-                            <img src="assets/images/logo-light.png" alt="" height="22">
-                            <!-- <span class="logo-lg-text-dark">Uplon</span> -->
-                        </span>
-                        <span class="logo-sm">
-                            <!-- <span class="logo-lg-text-dark">U</span> -->
-                            <img src="assets/images/logo-sm-light.png" alt="" height="24">
-                        </span>
-                    </a>
-                </div>
 
             </div>
             <!-- end Topbar -->
@@ -288,15 +205,9 @@
 
                         <ul class="metismenu" id="side-menu">
                             <li>
-                                <a href="{{ url('/dashboard') }}" style="color:#e4e6eb">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Dashboard </span>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="#" style="color:#e4e6eb" onclick="inProgress()">
                                     <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Continue later </span>
+                                    <span> Dashboard </span>
                                 </a>
                             </li>
                         </ul>
@@ -348,60 +259,58 @@
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end page title -->
-
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
-
                                     <!-- progress bar multistep form -->
                                     <div class="container">
                                         <header></header>
 
                                     </div>
 
-                                    <div class="row mt-4">
-                                        <div class="col-12" style="padding: 0 2em">
+                                    <div class="row mt-3" style="">
+                                        <div class="col-12" style="padding: 0 1em;">
                                             <h5>Member Capture</h5>
 
                                             {{-- Progress Blocks --}}
-                                            <div class="col-12 d-flex flex-column mb-3" style="gap:0.5em; ">
-                                                <div class="row d-flex gap-2" style="padding: 0 1em; gap:0.5em">
-                                                    <div class="col-3 p-2 process" style="border: 1px solid black; height: 2.5em">
-                                                        1. Capture New Member
+                                            <div class="col-12 d-flex flex-column mb-4 mt-4 progress">
+                                                <div class="row progress-row" style="">
+                                                    <div class="p-2 process d-flex box-top" style="border-radius: 0.5em; align-items:center; gap:1em; box-shadow: 10px 6px 7px rgba(0, 0, 0, 0.2);" >
+                                                        <div class="d-flex justify-content-center align-items-center ml-1 box-top-no" style=" border-radius: 50%; border: 1.5px solid black;">1</div>
+                                                        <h6 style="">Capture New Member</h6>
                                                     </div>
-                                                    <div class="col-3 p-2 process" style="border: 1px solid black; height: 2.5em">
-                                                        2. Policy Details
+                                                    <div class="p-2 process d-flex box-top" style="border-radius: 0.5em; align-items:center; gap:1em; box-shadow: 10px 6px 7px rgba(0, 0, 0, 0.2);" >
+                                                        <div class="d-flex justify-content-center align-items-center ml-1 box-top-no" style=" border-radius: 50%; border: 1.5px solid black;">2</div>
+                                                        <h6 style="color:black">Policy Details</h6>
                                                     </div>
-                                                    <div class="col-3 p-2 process" style="border: 1px solid black; height: 2.5em">
-                                                        3. Capturing Extended Member
+                                                    <div class="p-2 process d-flex box-top" style="border-radius: 0.5em; align-items:center; gap:1em; box-shadow: 10px 6px 7px rgba(0, 0, 0, 0.2);" >
+                                                        <div class="d-flex justify-content-center align-items-center ml-1 box-top-no" style=" border-radius: 50%; border: 1.5px solid black;">3</div>
+                                                        <h6 style="">Capturing Extended Member</h6>
                                                     </div>
                                                 </div>
-                                                <div class="row d-flex gap-2" style="padding: 0 1em; gap:0.5em">
-                                                    <div class="col-2 p-2 process" style="border: 1px solid black; height: 2.5em">
-                                                        4. Beneficiary Details
+                                                <div class="row d-flex gap-2 progress-row" style="">
+                                                    <div class="p-2 process d-flex box-bottom" style="border-radius: 0.5em; align-items:center; gap:1em; box-shadow: 10px 6px 7px rgba(0, 0, 0, 0.2);" >
+                                                        <div class="d-flex justify-content-center align-items-center ml-1 box-bottom-no" style=" border-radius: 50%; border: 1.5px solid black;">4</div>
+                                                        <h6 style="">Beneficiary Details</h6>
                                                     </div>
-                                                    <div class="col-2 p-2 process" style="border: 1px solid black; height: 2.5em">
-                                                        5. Payment Methods
+                                                    <div class="p-2 process d-flex box-bottom" style="border-radius: 0.5em; align-items:center; gap:1em; box-shadow: 10px 6px 7px rgba(0, 0, 0, 0.2);" >
+                                                        <div class="d-flex justify-content-center align-items-center ml-1 box-bottom-no" style=" border-radius: 50%; border: 1.5px solid black;">5</div>
+                                                        <h6 style="">Payment Methods</h6>
                                                     </div>
-                                                    <div class="col-2 p-2 process" style="border: 1px solid black; height: 2.5em">
-                                                        6. Verfication
+                                                    <div class="p-2 process d-flex box-bottom" style="border-radius: 0.5em; align-items:center; gap:1em; box-shadow: 10px 6px 7px rgba(0, 0, 0, 0.2);" >
+                                                        <div class="d-flex justify-content-center align-items-center ml-1 box-bottom-no" style=" border-radius: 50%; border: 1.5px solid black;">6</div>
+                                                        <h6 style="">Verfication</h6>
                                                     </div>
-                                                    <div class="col-2 p-2 process" style="border: 1px solid black; height: 2.5em">
-                                                        7. Compliance
+                                                    <div class="p-2 process d-flex box-bottom" style="border-radius: 0.5em; align-items:center; gap:1em; box-shadow: 10px 6px 7px rgba(0, 0, 0, 0.2);" >
+                                                        <div class="d-flex justify-content-center align-items-center ml-1 box-bottom-no" style=" border-radius: 50%; border: 1.5px solid black;">7</div>
+                                                        <h6 style="">Compliance</h6>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <style>
 
+                                            </style>
+                                            {{-- <hr > --}}
                                             <form id="wizard-validation-form"  >
                                                 <div>
                                                     {!! csrf_field() !!}
@@ -409,94 +318,85 @@
                                                     <section>
                                                         <input type="hidden" name="section" value="section1">
 
-                                                        <h3>Sales Representative</h3>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group clearfix">
-                                                                        <label for="broker-code"class="col-md-5 col-form-label">Sales Rep Code:<span class="text-danger">*</span> </label>
-                                                                        <div class="col-md-8">
-                                                                            <!-- <input class="required form-control" id="userName2" name="userName" type="text"style="margin-left:130px ! important"> -->
-                                                                            <select  name="sales_rep_code" id="sales_rep_code" class="form-select" style="margin-left:130px ! important;width:100%;height: calc(1.5em + 0.9rem + 2px);border-color: #efefef;">
-                                                                                <option value="" selected>{{ isset($saleRep) ? $saleRep->sales_rep_code : '' }}</option>
-                                                                                <option value="123" selected>123</option>
-                                                                                <option value="456" selected>456</option>
-                                                                                <option value="789" selected>789</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group clearfix">
-                                                                        <label for="password2"class="col-md-5 col-form-label"> Sales Rep Name:</label>
-                                                                        <div class="col-md-8">
-                                                                            <input class="required form-control" id="name" name="name" type="text" style="margin-left:130px ! important" placeholder="{{ isset($saleRep) ? $saleRep->name : '' }}">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- end row -->
-
-
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group clearfix">
-                                                                        <label for="userName2"class="col-md-5 col-form-label">Branch Name:</label>
-                                                                        <div class="col-md-8">
-                                                                            <input class="required form-control" id="branch_name" name="branch_name" type="text"style="margin-left:130px ! important" placeholder="{{ isset($saleRep) ? $saleRep->branch_name : '' }}">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group clearfix">
-                                                                        <label for="password2"class="col-md-5 col-form-label">Email:</label>
-                                                                        <div class="col-md-8">
-                                                                        <input class="required form-control" id="email" name="email" type="email" style="margin-left:130px ! important"
-                                                                             onchange="EmailValidation()" placeholder="{{ isset($saleRep) ? $saleRep->email : '' }}">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- end row -->
-
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group clearfix">
-                                                                        <label for="userName2"class="col-md-5 col-form-label">Policy Number: </label>
-                                                                        <div class="col-md-8">
-                                                                            <input class="required form-control" id="policy_number" name="policy_number" type="number"style="margin-left:130px ! important" placeholder="{{ isset($saleRep) ? $saleRep->policy_number : '' }}">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group clearfix">
-                                                                        <label for="password2"class="col-md-5 col-form-label">Agent Number:</label>
-                                                                        <div class="col-md-8">
-                                                                            <input id="agent_number" name="agent_number" type="number" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($saleRep) ? $saleRep->agent_number : '' }}">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- end row -->
+                                                        <h3 class="text-sm-start">Sales Representative</h3>
                                                         <hr>
-
+                                                        <div class="row d-flex mt-4" style="justify-content: space-between">
+                                                            <div class="col-md-6">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Sales Rep Code:</label>
+                                                                        <select  name="sales_rep_code" id="sales_rep_code" class="required form-control" style="width: 70%; margin-left: 10px;" >
+                                                                            <option value="" selected>{{ isset($saleRep) ? $saleRep->sales_rep_code : '' }}</option>
+                                                                            <option value="123" selected>123</option>
+                                                                            <option value="456" selected>456</option>
+                                                                            <option value="789" selected>789</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Sales Rep Name:</label>
+                                                                        <input class="required form-control" id="name" name="name" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($saleRep) ? $saleRep->name : '' }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex" style="justify-content: space-between">
+                                                            <div class="col-md-6">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Branch Name:</label>
+                                                                        <input class="required form-control" id="branch_name" name="branch_name" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($saleRep) ? $saleRep->branch_name : '' }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Email Address:</label>
+                                                                        <input class="required form-control" id="email" name="email" type="email" style="width: 70%; margin-left: 10px;"
+                                                                            onchange="EmailValidation()" placeholder="{{ isset($saleRep) ? $saleRep->email : '' }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex" style="justify-content: space-between">
+                                                            <div class="col-md-6">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Number:</label>
+                                                                        <input class="required form-control" id="policy_number" name="policy_number" type="number" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($saleRep) ? $saleRep->policy_number : '' }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Agent Name:</label>
+                                                                        <input id="agent_number" name="agent_number" type="number" class="required form-control" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($saleRep) ? $saleRep->agent_number : '' }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr >
                                                         <h3>Main Member</h3>
 
-                                                        <div class="row">
+                                                        <div class="row mt-4">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">FullNames:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="fullname" name="fullname" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->fullname : '' }}">
+                                                                    <div class="col-md-12 d-flex justify-content-center" style="gap:1em">
+                                                                        <label for="fullname" class=" col-form-label" style="width: 30%;">Full Names</label>
+                                                                        <input class="required form-control" id="fullname" name="fullname" type="text" style="width: 70%;" placeholder="{{ isset($mainMember) ? $mainMember->fullname : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Title:</label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select  name="title" class="form-select" id="title"style="margin-left:130px ! important;width:100%;height: calc(1.5em + 0.9rem + 2px);border-color: #efefef;">
+                                                                    <div class="col-md-12 d-flex justify-content-center" style="gap:1em">
+                                                                        <label for="password2"class="col-form-label" style="width: 30%;">Title:</label>
+                                                                        <select  name="title" class="required form-control" id="title" style="width: 70%; margin-left: 10px;">
 
                                                                             <option value="">{{ isset($mainMember) ? $mainMember->title : '' }}</option>
                                                                             <option value="mrs">Mrs</option>
@@ -515,17 +415,17 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Surname:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="surname" name="surname" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->surname : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="surname" class="col-form-label" style="width: 30%;">Surname:</label>
+                                                                        <input class="required form-control" id="surname" name="surname" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->surname : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> ID No:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="id_number" name="id_number" type="text" maxlength="13" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->id_number : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="id_number" class="col-form-label" style="width: 30%;">ID No:</label>
+                                                                        <input id="id_number" name="id_number" type="text" maxlength="13" class="required form-control" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->id_number : '' }}">
 
                                                                     </div>
                                                                 </div>
@@ -536,18 +436,17 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Initials:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="initials" name="initials" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->initials : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Initials:</label>
+                                                                        <input class="form-control" id="initials" name="initials" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->initials : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Gender: </label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="gender" name="gender" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Gender:</label>
+                                                                        <select id="gender" name="gender" class="required form-control" style="width: 70%; margin-left: 10px;">
                                                                             <option value=""> {{ isset($mainMember) ? $mainMember->gender : '' }}</option>
                                                                             <option value="F">Female</option>
                                                                             <option value="M">Male</option>
@@ -564,18 +463,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Date of Birth:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="date_of_birth" name="date_of_birth" type="date" onchange="calAge()"class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->date_of_birth : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Date of Birth:</label>
+                                                                        <input id="date_of_birth" name="date_of_birth" type="date" onchange="calAge()"class="required form-control" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->date_of_birth : '' }}">
 
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Age:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="age" name="age" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->age : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Age:</label>
+                                                                        <input class="form-control" id="age" name="age" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->age : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -601,18 +500,17 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Passport Number:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="passport_number" name="passport_number" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->passport_number : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Passport Number:</label>
+                                                                        <input class="form-control" id="passport_number" name="passport_number" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->passport_number : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Marital Status: </label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="marital_status" name="marital_status" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Marital Status:</label>
+                                                                        <select id="marital_status" name="marital_status" class="required form-control" style="width: 70%; margin-left: 10px;">
                                                                             <option value="">{{ isset($mainMember) ? $mainMember->marital_status : '' }}</option>
                                                                             <option value="S">Single</option>
                                                                             <option value="M">Married</option>
@@ -626,18 +524,17 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Cellphone Number:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="cellphone_number" name="cellphone_number" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->cellphone_number : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Cellphone Number:</label>
+                                                                        <input class="form-control" id="cellphone_number" name="cellphone_number" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->cellphone_number : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Citizenship</label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="citizenship" name="citizenship" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Citizenship:</label>
+                                                                        <select id="citizenship" name="citizenship" class="required form-control" style="width: 70%; margin-left: 10px;">
                                                                             <option value=""> {{ isset($mainMember) ? $mainMember->citizenship : '' }}</option>
                                                                             <option value="RSA">South Africa</option>
                                                                             <option value="ZMA">Zambia</option>
@@ -651,17 +548,17 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Tellphone:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="tellphone" name="tellphone" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->tellphone : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Tellphone:</label>
+                                                                        <input class="form-control" id="tellphone" name="tellphone" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->tellphone : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Email:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="email" name="email" type="email" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->email : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Email:</label>
+                                                                        <input id="email" name="email" type="email" class="required form-control" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->email : '' }}">
 
                                                                     </div>
                                                                 </div>
@@ -670,17 +567,17 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Street Address:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="street_address" name="street_address" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->street_address : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Street Address:</label>
+                                                                        <input class="form-control" id="street_address" name="street_address" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->street_address : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> PO Box:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="po_box" name="po_box" type="text" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->po_box : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">PO Box:</label>
+                                                                        <input id="po_box" name="po_box" type="text" class="required form-control" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->po_box : '' }}">
 
                                                                     </div>
                                                                 </div>
@@ -689,18 +586,17 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Town or City:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="city" name="city" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->city : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Town or City:</label>
+                                                                        <input class="form-control" id="city" name="city" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->city : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Province:</label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="province" name="province" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Province:</label>
+                                                                        <select id="province" name="province" class="required form-control" style="width: 70%; margin-left: 10px;">
                                                                             <option value=""> {{ isset($mainMember) ? $mainMember->province : '' }}</option>
                                                                             <option value="gauteng">gauteng</option>
                                                                             <option value="limpopo">limpopo</option>
@@ -714,9 +610,9 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Postal Code:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="form-control" id="postal_code" name="postal_code" type="text"style="margin-left:130px ! important" placeholder="{{ isset($mainMember) ? $mainMember->postal_code : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Postal Code:</label>
+                                                                        <input class="form-control" id="postal_code" name="postal_code" type="text" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($mainMember) ? $mainMember->postal_code : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -730,13 +626,13 @@
                                                         <input type="hidden" name="section" value="section2">
 
                                                         <h3>Policy Details</h3>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Policy Type:<span class="text-danger">*</span> </label>
-                                                                    <div class="col-md-8">
+                                                        <div class="row d-flex mt-4" style="justify-content: space-between">
+                                                            <div class="col-md-6">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Type<span class="text-danger">*</span> </label>
 
-                                                                        <select class="required form-control"onChange="myplan()" id="policy_type" name="policy_type" style="margin-left:130px ! important">
+                                                                        <select class="required form-control"onChange="myplan()" id="policy_type" name="policy_type" style="width: 70%; margin-left: 10px;">
                                                                             <option id="producttype"  readonly name="product_type" value="plan_A ">{{ isset($policyDetails) ? $policyDetails->policy_type : '' }}</option>
                                                                             <option id="producttype"  readonly name="product_type" value="plan_A ">plan_A</option>
                                                                             <option id="producttype"  readonly name="product_type" value="plan_B ">plan_B</option>
@@ -746,38 +642,13 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                    <script>
-                                                                        function myplan(){
-                                                                            var prod = document.getElementById("plan_type").value;
-
-                                                                            // console.log(prod);
-
-                                                                            $(document).ready(function(){
-                                                                                // $.ajax({
-                                                                                //     url : "/getproducttype",
-                                                                                //     type : "GET",
-                                                                                //     dataType : "form_data",
-                                                                                //     data : {'prod':prod}
-                                                                                // }).done(function(response){
-                                                                                //     console.log(response.data);
-                                                                                //     console.log("Product type: " + response.data['product_type']);
-                                                                                //     document.getElementById("prodprem").value = response.data['plan_type'];
-
-
-                                                                                // })
-                                                                            })
-
-                                                                        }
-
-
-                                                                    </script>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Policy Status:</label>
-                                                                    <div class="col-md-8">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Status</label>
 
-                                                                        <select id="policy_status" name="policy_status" class="required form-control"style="margin-left:130px ! important">
+                                                                        <select id="policy_status" name="policy_status" class="required form-control" style="width: 70%; margin-left: 10px;">
                                                                             <option value="">{{ isset($policyDetails) ? $policyDetails->policy_status : '' }}</option>
                                                                             <option value="Active">Active </option>
                                                                             <option value="Archieve">Archive</option>
@@ -797,18 +668,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Policy Start Date:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="policy_start_date" name="policy_start_date" type="date"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->policy_start_date : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Start Date</label>
+                                                                        <input class="required form-control" id="policy_start_date" name="policy_start_date" type="date"style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->policy_start_date : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Inception Date:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="inception_date" name="inception_date" type="date" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->inception_date : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Inception Date</label>
+                                                                        <input id="inception_date" name="inception_date" type="date" class="required form-control" style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->inception_date : '' }}">
 
                                                                     </div>
                                                                 </div>
@@ -817,18 +688,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Premium:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="premium" name="premium" type="text"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->premium : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Premium</label>
+                                                                        <input class="required form-control" id="premium" name="premium" type="text"style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->premium : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Cover Amount:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="cover_amount" name="cover_amount" type="number" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->cover_amount : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Cover Amount</label>
+                                                                        <input id="cover_amount" name="cover_amount" type="number" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->cover_amount : '' }}">
 
                                                                     </div>
                                                                 </div>
@@ -854,18 +725,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Policy Cover Date:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="policy_cover_date" name="policy_cover_date" type="date"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->policy_cover_date : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Cover Date</label>
+                                                                        <input class="required form-control" id="policy_cover_date" name="policy_cover_date" type="date"style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->policy_cover_date : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Total Premium:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="total_premium" name="total_premium" type="number" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->total_premium : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Total Premium</label>
+                                                                        <input id="total_premium" name="total_premium" type="number" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->total_premium : '' }}">
 
                                                                     </div>
                                                                 </div>
@@ -874,18 +745,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Underwritten By:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="underwritten_by" name="underwritten_by" type="text"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->underwritten_by : '' }}">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Under written By</label>
+                                                                        <input class="required form-control" id="underwritten_by" name="underwritten_by" type="text"style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->underwritten_by : '' }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
-                                                                <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Policy Number:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="policy_number" name="policy_number" type="text" class="required form-control"style="margin-left:130px ! important" placeholder="{{ isset($policyDetails) ? $policyDetails->policy_number : '' }}">
+                                                                <div class="form-group clearfix">`
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Number</label>
+                                                                        <input id="policy_number" name="policy_number" type="text" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder="{{ isset($policyDetails) ? $policyDetails->policy_number : '' }}">
 
                                                                     </div>
                                                                 </div>
@@ -915,10 +786,9 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Title:<span class="text-danger">*</span> </label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="emtitle" name="emtitle" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Title:</label>
+                                                                        <select id="emtitle" name="emtitle" class="required form-control"style="width: 70%; margin-left: 10px;">
                                                                             <option value="">Title</option>
                                                                             <option value="Mr">Mr</option>
                                                                             <option value="Mrs">Mrs</option>
@@ -933,18 +803,15 @@
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Relationship:</label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="emrelationship" name="emrelationship" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Relationship:</label>
+                                                                        <select id="emrelationship" name="emrelationship" class="required form-control"style="width: 70%; margin-left: 10px;">
                                                                             <option value="">select</option>
                                                                             <option value="Spouse">Spouse</option>
                                                                             <option value="child">child</option>
                                                                             <option value="father or mother">father or mother</option>
                                                                             <option value="sibling">sibling</option>
                                                                             <option value="Free extended">Free extended</option>
-
-
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -954,39 +821,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Full names:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="emfullname" name="emfullname" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Full names:</label>
+                                                                        <input class="required form-control" id="emfullname" name="emfullname" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Surname:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="emsurname" name="emsurname" type="text" class="required form-control"style="margin-left:130px ! important">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">ID No:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="emid_number" name="emid_number" type="text"style="margin-left:130px ! important">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Date of Birth:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="emdate_of_birth" name="emdate_of_birth" type="date" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Surname:</label>
+                                                                        <input id="emsurname" name="emsurname" type="text" class="required form-control"style="width: 70%; margin-left: 10px;">
 
                                                                     </div>
                                                                 </div>
@@ -996,18 +842,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Cellphone:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="emcellphone" name="emcellphone" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">ID No:</label>
+                                                                        <input class="required form-control" id="emid_number" name="emid_number" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Email Address:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="ememail" name="ememail" type="text" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Date of Birth:</label>
+                                                                        <input id="emdate_of_birth" name="emdate_of_birth" type="date" class="required form-control"style="width: 70%; margin-left: 10px;">
 
                                                                     </div>
                                                                 </div>
@@ -1017,19 +863,39 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Initials:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="eminitials" name="eminitials" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Cellphone:</label>
+                                                                        <input class="required form-control" id="emcellphone" name="emcellphone" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Gender</label>
-                                                                    <div class="col-md-8">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Email Address:</label>
+                                                                        <input id="ememail" name="ememail" type="text" class="required form-control"style="width: 70%; margin-left: 10px;">
 
-                                                                        <select id="emgender" name="emgender" class="required form-control"style="margin-left:130px ! important">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group clearfix">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Initials:</label>
+                                                                        <input class="required form-control" id="eminitials" name="eminitials" type="text"style="width: 70%; margin-left: 10px;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group clearfix">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Gender:</label>
+                                                                        <select id="emgender" name="emgender" class="required form-control"style="width: 70%; margin-left: 10px;">
                                                                             <option value=""></option>
                                                                             <option value="F">Female</option>
                                                                             <option value="M">Male</option>
@@ -1043,19 +909,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Cover Amount: </label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="emcover_amount" name="emcover_amount" type="number"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Cover Amount:</label>
+                                                                        <input class="required form-control" id="emcover_amount" name="emcover_amount" type="number"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Policy Type:</label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select onChange="myplan()" id="empolicy_type" name="empolicy_type" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Type:</label>
+                                                                        <select onChange="myplan()" id="empolicy_type" name="empolicy_type" class="required form-control"style="width: 70%; margin-left: 10px;">
 
 
                                                                             <option id="producttype"  readonly name="product_type" value="ju"></option>
@@ -1072,43 +937,32 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Add Premium:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="emadd_premium" name="emadd_premium" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Add Premium:</label>
+                                                                        <input class="required form-control" id="emadd_premium" name="emadd_premium" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Total Premium:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="emtotal_premium" name="emtotal_premium" type="number" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Total Premium:</label>
+                                                                        <input id="emtotal_premium" name="emtotal_premium" type="number" class="required form-control"style="width: 70%; margin-left: 10px;">
 
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div class="half text flexrow" style="flex-direction:row;">
-                                                        </div>
-
-                                                        <div class="col-md-6" id="inputFormRow"  style="width: 100%">
-                                                            <div class="col-lg-12"  style=" left: -1em">
-                                                                <div>
-                                                                    <hr>
-                                                                </div>
-                                                                <div  id= "newext"></div>
-                                                                {{-- <button id="addExtMember" type="button" class="btn btn-primary waves-effect waves-light mb-2"> Add Exteneded member</button> --}}
-
-                                                            </div>
-                                                        </div>
-
+                                                        <hr>
+                                                        <button id="addExtMember" type="button" class="btn btn-primary waves-effect waves-light mb-2" style="font-family: 'Helvetica Neue', Arial, sans-serif;"> Add Extended Member</button>
+                                                        <hr>
                                                         {{-- Table --}}
-                                                        <div class="table-responsive" style="width: 100%; border: none">
-                                                            <button id="addExtMember" type="button" class="btn btn-primary waves-effect waves-light mb-2"> Add Extended Member</button>
-                                                            <table class="table-sm table-bordered table-striped align-middle data-table p-2">
-                                                                <thead class="table-dark text-light">
+                                                        <div class="table-responsive" style="width: 100%; border: none; border-radius: 0.3em; overflow-x: auto;">
+
+                                                            <table id="datatable" class="table table-sm table-bordered table-striped align-middle data-table" style="width: 100%; margin-bottom: 0;">
+                                                                <thead class="table-dark text-light text-center">
                                                                     <tr>
                                                                         <th>Main Member Full Names</th>
                                                                         <th>Surname</th>
@@ -1229,6 +1083,22 @@
                                                                     })
                                                                     .then(response => response.json())
                                                                     .then(response => {
+                                                                        // Clear input fields
+                                                                        document.getElementById('emtitle').value = '';
+                                                                        document.getElementById('emrelationship').value = '';
+                                                                        document.getElementById('emfullname').value = '';
+                                                                        document.getElementById('emsurname').value = '';
+                                                                        document.getElementById('emid_number').value = '';
+                                                                        document.getElementById('emdate_of_birth').value = '';
+                                                                        document.getElementById('emcellphone').value = '';
+                                                                        document.getElementById('ememail').value = '';
+                                                                        document.getElementById('eminitials').value = '';
+                                                                        document.getElementById('emgender').value = '';
+                                                                        document.getElementById('emcover_amount').value = '';
+                                                                        document.getElementById('empolicy_type').value = '';
+                                                                        document.getElementById('emadd_premium').value = '';
+                                                                        document.getElementById('emtotal_premium').value = '';
+
                                                                         console.log("input", response.input);
                                                                         console.log("Extended member", response);
 
@@ -1282,10 +1152,9 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Title:<span class="text-danger">*</span> </label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="bd_title" name="bd_title" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Title:</label>
+                                                                        <select id="bd_title" name="bd_title" class="required form-control"style="width: 70%; margin-left: 10px;">
                                                                             <option value="">Title</option>
                                                                             <option value="Mr">Mr</option>
                                                                             <option value="Mrs">Mrs</option>
@@ -1300,10 +1169,9 @@
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label"> Relationship:</label>
-                                                                    <div class="col-md-8">
-
-                                                                        <select id="bd_relationship" name="bd_relationship" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Relationship:</label>
+                                                                        <select id="bd_relationship" name="bd_relationship" class="required form-control"style="width: 70%; margin-left: 10px;">
                                                                             <option value="">select</option>
                                                                             <option value="Spouse">Spouse</option>
                                                                             <option value="child">child</option>
@@ -1320,39 +1188,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Full names:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="bd_fullnames" name="bd_fullnames" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Full names:</label>
+                                                                        <input class="required form-control" id="bd_fullnames" name="bd_fullnames" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Surname:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="bd_surname" name="bd_surname" type="text" class="required form-control"style="margin-left:130px ! important">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- end row -->
-
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">ID No:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="bd_id_number" name="bd_id_number" type="text"style="margin-left:130px ! important">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Date of Birth:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="bd_date_of_birth" name="bd_date_of_birth" type="date" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Surname:</label>
+                                                                        <input id="bd_surname" name="bd_surname" type="text" class="required form-control"style="width: 70%; margin-left: 10px;">
 
                                                                     </div>
                                                                 </div>
@@ -1362,18 +1209,18 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Cellphone:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="bd_cellphone" name="bd_cellphone" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">ID No:</label>
+                                                                        <input class="required form-control" id="bd_id_number" name="bd_id_number" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Email Address:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="bd_email" name="bd_email" type="text" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Date of Birth:</label>
+                                                                        <input id="bd_date_of_birth" name="bd_date_of_birth" type="date" class="required form-control"style="width: 70%; margin-left: 10px;">
 
                                                                     </div>
                                                                 </div>
@@ -1383,19 +1230,39 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Initials:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="bd_initials" name="bd_initials" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Cellphone:</label>
+                                                                        <input class="required form-control" id="bd_cellphone" name="bd_cellphone" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Gender</label>
-                                                                    <div class="col-md-8">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Email Address:</label>
+                                                                        <input id="bd_email" name="bd_email" type="text" class="required form-control"style="width: 70%; margin-left: 10px;">
 
-                                                                        <select id="bd_gender" name="bd_gender" class="required form-control"style="margin-left:130px ! important">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- end row -->
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group clearfix">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Initials:</label>
+                                                                        <input class="required form-control" id="bd_initials" name="bd_initials" type="text"style="width: 70%; margin-left: 10px;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group clearfix">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Gender:</label>
+                                                                        <select id="bd_gender" name="bd_gender" class="required form-control"style="width: 70%; margin-left: 10px;">
                                                                             <option value=""></option>
                                                                             <option value="F">Female</option>
                                                                             <option value="M">Male</option>
@@ -1409,116 +1276,35 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="userName2"class="col-md-5 col-form-label">Work Tell: </label>
-                                                                    <div class="col-md-8">
-                                                                        <input class="required form-control" id="bd_work_tell" name="bd_work_tell" type="text"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Cover Amount:</label>
+                                                                        <input class="required form-control" id="bd_work_tell" name="bd_work_tell" type="text"style="width: 70%; margin-left: 10px;">
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <div class="form-group clearfix">
-                                                                    <label for="password2"class="col-md-5 col-form-label">Percentage:</label>
-                                                                    <div class="col-md-8">
-                                                                        <input id="bd_percentage" name="bd_percentage" type="number" class="required form-control"style="margin-left:130px ! important">
+                                                                    <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                                                                        <label for="tellphone" class="col-form-label" style="width: 30%;">Percentage:</label>
+                                                                        <input id="bd_percentage" name="bd_percentage" type="number" class="required form-control"style="width: 70%; margin-left: 10px;">
 
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div><!-- end row -->
+                                                        <hr>
 
                                                         <!-- start add button beneficiary -->
                                                         <div class="col-md-6" id="inputFormRow">
                                                             <div class="col-lg-12">
-
-                                                                <div>
-                                                                    <hr>
-                                                                </div>
-
-                                                                    <div id="newRow"></div>
-                                                                    <button id="addRow" type="button" class="btn btn-info" >Add Beneficiary</button>
+                                                                <div id="newRow"></div>
+                                                                <button id="addRow" type="button" class="btn btn-info" style="font-family: 'Helvetica Neue', Arial, sans-serif;">Add Beneficiary</button>
                                                             </div>
                                                         </div>
 
                                                         <!-- button beneficiary style -->
-                                                        <style>
-                                                            .btn_round {
-                                                                width: 35px;
-                                                                height: 35px;
-                                                                display: inline-block;
-                                                                border-radius: 50%;
-                                                                text-align: center;
-                                                                line-height: 35px;
-                                                                margin-left: 10px;
-                                                                border: 1px solid #ccc;
-                                                                cursor: pointer;
-                                                            }
-                                                            .btn_round:hover {
-                                                                color: #fff;
-                                                                background: #6b4acc;
-                                                                border: 1px solid #6b4acc;
-                                                            }
 
-                                                            .btn_content_outer {
-                                                                display: inline-block;
-                                                                width: 85%;
-                                                            }
-                                                            .close_c_btn {
-                                                                width: 30px;
-                                                                height: 30px;
-                                                                position: absolute;
-                                                                right: 10px;
-                                                                top: 0px;
-                                                                line-height: 30px;
-                                                                border-radius: 50%;
-                                                                background: #ededed;
-                                                                border: 1px solid #ccc;
-                                                                color: #ff5c5c;
-                                                                text-align: center;
-                                                                cursor: pointer;
-                                                            }
-
-                                                            .add_icon {
-                                                                padding: 10px;
-                                                                border: 1px dashed #aaa;
-                                                                display: inline-block;
-                                                                border-radius: 50%;
-                                                                margin-right: 10px;
-                                                            }
-                                                            .add_group_btn {
-                                                                display: flex;
-                                                            }
-                                                            .add_group_btn i {
-                                                                font-size: 32px;
-                                                                display: inline-block;
-                                                                margin-right: 10px;
-                                                            }
-
-                                                            .add_group_btn span {
-                                                                margin-top: 8px;
-                                                            }
-                                                            .add_group_btn,
-                                                            .clone_sub_task {
-                                                                cursor: pointer;
-                                                            }
-
-                                                            .sub_task_append_area .custom_square {
-                                                                cursor: move;
-                                                            }
-
-                                                            .del_btn_d {
-                                                                display: inline-block;
-                                                                position: absolute;
-                                                                right: 20px;
-                                                                border: 2px solid #ccc;
-                                                                border-radius: 50%;
-                                                                width: 40px;
-                                                                height: 40px;
-                                                                line-height: 40px;
-                                                                text-align: center;
-                                                                font-size: 18px;
-                                                            }
-                                                        </style>
 
                                                         <script>
                                                             function AddBen(){
@@ -1538,23 +1324,22 @@
                                                             //  $membbeneficiary=DB::table('beneficiary_details')
                                                             //  ->get();
                                                         ?>
-                                                        <h4>Benefinciary list</h4>
-                                                        <div>
-                                                            <!-- <table class="table table-secondary table-hover">  -->
-                                                            <table id="datatable" class="table table-secondary table-hover" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                                <thead>
+                                                        <h4 style="padding-top: 0.3em">Benefinciary list</h4>
+                                                        <div class="table-responsive" style="width: 100%; border: none; border-radius: 0.5em; overflow-x: auto; padding-bottom: 2em ">
+                                                            <table id="datatable" class="table table-sm table-bordered table-striped align-middle data-table" style="width: 100%; margin-bottom: 0;">
+                                                                <thead class="table-dark text-light text-center">
                                                                     <tr>
-                                                                        <th>FIRST NAME</th>
-                                                                        <th>LAST NAME</th>
-                                                                        <th>ID NUMBER</th>
-                                                                        <th>GENDER</th>
-                                                                        <th>CELL</th>
-                                                                        <th>EMAIL</th>
-                                                                        <th>ACTIONS</th>
+                                                                        <th >FIRST NAME</th>
+                                                                        <th >LAST NAME</th>
+                                                                        <th >ID NUMBER</th>
+                                                                        <th >GENDER</th>
+                                                                        <th >CELL</th>
+                                                                        <th >EMAIL</th>
+                                                                        <th >ACTIONS</th>
 
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="beneficiaryMember_body">
+                                                                <tbody id="beneficiaryMember_body" class="table-light table-bordered">
                                                                     @forelse ($beneficiaryMembers as $beneficiaryMember)
                                                                     <tr>
                                                                         <td>{{ $beneficiaryMember->bd_fullnames }}</td>
@@ -1568,16 +1353,10 @@
                                                                             <a href="/member-capture/{{ $beneficiaryMember->bd_id }}/edit" class="btn btn-outline-info btn-sm edit" title="Edit">
                                                                                 <i class="fas fa-pencil-alt"></i>
                                                                             </a>
-                                                                            <form action="/member-capture/{{ $beneficiaryMember->bd_id }}" method="POST">
-                                                                                {{ method_field('DELETE') }}
-                                                                                {{ csrf_field() }}
-                                                                                <input type="hidden" name="section" value="{{ $beneficiaryMember->bd_id }}">
-                                                                                <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMember({{ $beneficiaryMember->bd_id }})">
-                                                                                    <i class="fa fa-trash fa-lg"></i>
-                                                                                </button>
-                                                                            </form>
+                                                                            <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMember({{ $beneficiaryMember->bd_id }})">
+                                                                                <i class="fa fa-trash fa-lg"></i>
+                                                                            </button>
                                                                         </td>
-
 
                                                                     </tr>
                                                                     @empty
@@ -1655,6 +1434,20 @@
 
                                                                     .then(response => response.json())
                                                                     .then(response => {
+                                                                        // Clear input fields
+                                                                        document.getElementById('bd_title').value = '';
+                                                                        document.getElementById('bd_relationship').value = '';
+                                                                        document.getElementById('bd_fullnames').value = '';
+                                                                        document.getElementById('bd_surname').value = '';
+                                                                        document.getElementById('bd_id_number').value = '';
+                                                                        document.getElementById('bd_date_of_birth').value = '';
+                                                                        document.getElementById('bd_cellphone').value = '';
+                                                                        document.getElementById('bd_email').value = '';
+                                                                        document.getElementById('bd_initials').value = '';
+                                                                        document.getElementById('bd_gender').value = '';
+                                                                        document.getElementById('bd_work_tell').value = '';
+                                                                        document.getElementById('bd_percentage').value = '';
+
                                                                         console.log("input", response.input);
                                                                         console.log("beneficiary member", response);
                                                                         $("#no-beneficiary-members").remove();
@@ -2306,7 +2099,7 @@
                                                         <div>
                                                             <input type="checkbox" name="chkCash" id="chkbox3" <?php if ($currentPaymentMethod === "chkCash") echo 'checked'; ?> onchange="toggleElement('cashhide', this.checked)" style="height:20px;width:20px">
                                                             <label for="chkCash">Cash</label>
-                                                            <div id="cashhide" style="display:none; border:1px solid rgb(0, 119, 255)">
+                                                            <div id="cashhide" style="display:none;">
                                                                 <br/>
                                                                 <div class="row" id="to-show">
                                                                     <div class="col-md-6">
@@ -2410,7 +2203,7 @@
                                                                 <div class="row"id="to-show">
                                                                     <div class="col-md-6">
                                                                         <div class="row mb-3">
-                                                                            <label for="txtCityBilling" class="col-lg-3 col-form-label">Employment details/Authorisation:employer:</label>
+                                                                            <label for="txtCityBilling" class="col-lg-3 col-form-label">Employment details/Authorisation employer:</label>
                                                                             <div class="col-lg-9">
                                                                                 <input id="txtCompanyShipping" name="persal_emp" type="text" class="form-control" placeholder="{{ isset($persalPayment) ? $persalPayment->persal_emp : '' }}">
                                                                             </div>
@@ -2740,11 +2533,10 @@
                                                         <p>If you are sure the information provided is correct and you have supplied all supporting documentation you
                                                             can click submit otherwise close this window and continue when you have this information.</p>
                                                     </div>
-                                                    <div style="width: 100%; margin-top:2em ">
+                                                    <div style="width: 100%; margin-top:1em">
                                                         <div style="width: 100%;">
-                                                          <button type="button" id="prevBtn" class="prev blue" onclick="nextPrev(-1)" style="display: inline !important; float: left;">Previous</button>
-                                                          <button type="button" id="nextBtn" class="nxt blue" onclick="nextPrev(1)" style="display: inline !important;">Next</button>
-
+                                                          <button type="button" id="prevBtn" class="prev blue" onclick="nextPrev(-1)" style="display: inline !important; float: left; border-radius:0.5em; margin-right:1em; margin-bottom:0.3em;font-family: 'Helvetica Neue', Arial, sans-serif;">Previous</button>
+                                                          <button type="button" id="nextBtn" class="nxt blue" onclick="nextPrev(1)" style="display: inline !important; border-radius:0.5em; margin-bottom:0.3em;font-family: 'Helvetica Neue', Arial, sans-serif;">Next</button>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -2755,7 +2547,7 @@
                                                         }
                                                     ?>
 
-                                                    <span style="margin-top: ">{{ $msg }}</span>
+                                                    <span>{{ $msg }}</span>
                                                     {{-- <span>{{ isset($saleRep) ? '$policyDetails->policy_type' : 'no saleRep'}}</span>
                                                     <span>{{ isset($mainMember) ? '$policyDetails->policy_type' : 'no mainMember' }}</span> --}}
 
@@ -2802,6 +2594,7 @@
 
                                                             // console.log("currentTab", <?php echo json_encode($section); ?> +n);
                                                             const sections = form.getElementsByTagName('section');
+                                                            const progressContainer= document.getElementsByClassName('progress');
 
                                                             if (currentTab === 5) {//if we are in section 6
                                                                 for (let i = 0; i < sections.length; i++) {  //hide all sections
@@ -2810,12 +2603,21 @@
 
                                                                 const columnElements = document.getElementsByClassName('process');
                                                                 for (let i = 0; i < columnElements.length; i++) {
-                                                                    columnElements[i].style.backgroundColor = '#fff';
+                                                                    columnElements[i].style.backgroundColor = '#f5f5f5ab';
+                                                                    columnElements[i].querySelector('h6').style.color = '#000';
                                                                     columnElements[i].style.color = '#000';
+                                                                    columnElements[i].querySelector('.d-flex').style.boxShadow = '2px 0px 0px 0px rgba(0,0,0,0.47)';
+                                                                    columnElements[i].querySelector('.d-flex').style.border= '2px solid black';
+                                                                    columnElements[i].querySelector('.d-flex').style.backgroundColor = '#fff';
+
                                                                 }
-                                                                // console.log("showtab currentTab", currentTab)//delete here>>>>>>
-                                                                columnElements[currentTab].style.backgroundColor = '#3d74f1';
+
+                                                                columnElements[currentTab].style.backgroundColor = '#0074B7';
                                                                 columnElements[currentTab].style.color = '#fff';
+                                                                columnElements[currentTab].querySelector('h6').style.color = '#fff';
+                                                                columnElements[currentTab].querySelector('.d-flex').style.boxShadow = '2px 0px 0px 0px rgba(0,0,0,0.47)';
+                                                                columnElements[currentTab].querySelector('.d-flex').style.border= '2px solid white';
+                                                                columnElements[currentTab].querySelector('.d-flex').style.backgroundColor = '#8f2901';
 
                                                                 for (let i = 0; i < 5; i++) { //show only section 1 to 5
                                                                     const currentSection= sections[i];
@@ -2833,6 +2635,8 @@
                                                                     const divider = document.createElement('hr');
 
                                                                     button.textContent = 'Update Section ' + sectionNumber; //---------->
+                                                                    button.style.background= '#0074B7';
+                                                                    button.style.borderRadius = '0.3em';
                                                                     button.style.marginTop = '1.5em';
                                                                     button.id = `section-button-${sectionNumber}`;
                                                                     divider.id = `section-divider-${sectionNumber}`;
@@ -2949,12 +2753,21 @@
 
                                                                 const columnElements = document.getElementsByClassName('process');
                                                                 for (let i = 0; i < columnElements.length; i++) {
-                                                                    columnElements[i].style.backgroundColor = '#fff';
+                                                                    columnElements[i].style.backgroundColor = '#f5f5f5ab';
+                                                                    columnElements[i].querySelector('h6').style.color = '#000';
                                                                     columnElements[i].style.color = '#000';
+                                                                    columnElements[i].querySelector('.d-flex').style.boxShadow = '2px 0px 0px 0px rgba(0,0,0,0.47)';
+                                                                    columnElements[i].querySelector('.d-flex').style.border= '2px solid black';
+                                                                    columnElements[i].querySelector('.d-flex').style.backgroundColor = '#fff';
+
                                                                 }
-                                                                // console.log("showtab currentTab", currentTab)
-                                                                columnElements[currentTab].style.backgroundColor = '#3d74f1';
+
+                                                                columnElements[currentTab].style.backgroundColor = '#0074B7';
                                                                 columnElements[currentTab].style.color = '#fff';
+                                                                columnElements[currentTab].querySelector('h6').style.color = '#fff';
+                                                                columnElements[currentTab].querySelector('.d-flex').style.boxShadow = '2px 0px 0px 0px rgba(0,0,0,0.47)';
+                                                                columnElements[currentTab].querySelector('.d-flex').style.border= '2px solid white';
+                                                                columnElements[currentTab].querySelector('.d-flex').style.backgroundColor = '#8f2901';
 
                                                                 if (currentTab === 0) {
                                                                     prevBtn.style.display = 'none';
@@ -3006,6 +2819,8 @@
                                                             const sections = form.getElementsByTagName('section');
                                                             const currentSection = sections[currentTab];
                                                             const currentInputs = currentSection.querySelectorAll('input');
+                                                            const currentSelects = currentSection.querySelectorAll('select');
+
                                                             let responseSection;
                                                             let newPaymentMethod=null;
                                                             if(sectionOne === undefined) {
@@ -3038,6 +2853,11 @@
                                                                         } else {
                                                                             payload[input.name] = input.value;
                                                                         }
+                                                                    }
+
+                                                                    for (let i = 0; i < currentSelects.length; i++) { // Placing all the select values in the payload
+                                                                        const select = currentSelects[i];
+                                                                        payload[select.name] = select.value;
                                                                     }
 
                                                                     if(responseSection === '' || responseSection === null || responseSection === undefined){//if a response section doesn't exist
@@ -3105,7 +2925,7 @@
                                                                         const data = await response.json();
                                                                         responseSection= data.section;
                                                                         sectionOne=data.sectionOne;
-                                                                        const formCompleted= data.section + data.nextState === 8? true: false;
+                                                                        const formCompleted= (data.section + data.nextState) === 8? true: false;
                                                                         initMainMember= 'true';
                                                                         //*************************************************
                                                                         //delete here>>>>>>
@@ -3121,11 +2941,6 @@
                                                                             window.location.href = '/dashboard';
                                                                         }
 
-                                                                        if(method === 'PUT'){
-                                                                            console.log("update mainId", data.mainMemberId);
-                                                                            console.log("update id", data.id);
-                                                                            console.log("update input", data.policyDetails);
-                                                                        }
                                                                         //end delete>>>>>>
                                                                         //*************************************************
                                                                         currentTab += n;
@@ -3168,12 +2983,20 @@
 
                                                                                 const columnElements = document.getElementsByClassName('process');
                                                                                 for (let i = 0; i < columnElements.length; i++) {
-                                                                                    columnElements[i].style.backgroundColor = '#fff';
+                                                                                    columnElements[i].style.backgroundColor = '#f5f5f5ab';
+                                                                                    columnElements[i].querySelector('h6').style.color = '#000';
                                                                                     columnElements[i].style.color = '#000';
+                                                                                    columnElements[i].querySelector('.d-flex').style.boxShadow = '2px 0px 0px 0px rgba(0,0,0,0.47)';
+                                                                                    columnElements[i].querySelector('.d-flex').style.border= '2px solid black';
+                                                                                    columnElements[i].querySelector('.d-flex').style.backgroundColor = '#fff';
                                                                                 }
-                                                                                // console.log("showtab currentTab", currentTab)//delete here>>>>>>
-                                                                                columnElements[currentTab].style.backgroundColor = '#3d74f1';
+
+                                                                                columnElements[currentTab].style.backgroundColor = '#0074B7';
                                                                                 columnElements[currentTab].style.color = '#fff';
+                                                                                columnElements[currentTab].querySelector('h6').style.color = '#fff';
+                                                                                columnElements[currentTab].querySelector('.d-flex').style.boxShadow = '2px 0px 0px 0px rgba(0,0,0,0.47)';
+                                                                                columnElements[currentTab].querySelector('.d-flex').style.border= '2px solid white';
+                                                                                columnElements[currentTab].querySelector('.d-flex').style.backgroundColor = '#8f2901';
 
                                                                                 for (let i = 0; i < 5; i++) { //show only section 1 to 5
                                                                                     const currentSection= sections[i];
@@ -3191,6 +3014,8 @@
                                                                                     const divider = document.createElement('hr');
 
                                                                                     button.textContent = 'Update Section ' + sectionNumber; //---------->
+                                                                                    button.style.background= '#0074B7';
+                                                                                    button.style.borderRadius='0.3em';
                                                                                     button.style.marginTop = '1.5em';
                                                                                     button.id = `section-button-${sectionNumber}`;
                                                                                     divider.id = `section-divider-${sectionNumber}`;
