@@ -1,0 +1,114 @@
+body{
+    background: #e6e4e4;
+}
+
+.navbar-custom{
+    background: none;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 0.2em;
+}
+
+.small-left-side-menu{
+    display: none;
+}
+.small-left-side-menu .navbar a{
+    color: #fff;
+    font-size: 2rem;
+    margin: 0.8rem;
+}
+
+.small-left-side-menu .navbar a:hover{
+    color: var(--orange);
+}
+
+.left-side-menu{
+    background: #003B73;
+    border-start-end-radius: 0.5em;
+}
+.left-side-menu i{
+    color: rgb(255, 255, 255);
+}
+
+.topbar-navigation{
+    margin-right: 1em;
+    background: white;
+    border-radius: 2em;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #003B73;
+    color: rgb(0, 0, 0);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.582);
+}
+.topbar-navigation li{
+    width: auto;
+}
+
+i{
+    color: rgb(0, 0, 0);
+}
+
+@media screen and (min-width: 500px) and (max-width: 850px) {
+    .navbar-custom{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .navbar-custom{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .navbar-custom #side-menu .nav-item{
+        font-size: 1.5em;
+        padding-top: 0.5em;
+    }
+    .navbar-custom #side-menu .nav-item-top{
+        padding: 1em;
+    }
+    .navbar-custom #side-menu .nav-second-level a{
+        background-color: #daedff6e;
+        color: #496783;
+        font-size: 0.7em;
+    }
+
+    .navbar-custom #side-menu span{
+        color: black;
+    }
+    .navbar-custom #side-menu #nav-icon{
+        margin-right: 1em;
+    }
+
+    .small-left-side-menu{
+        display: block;
+        float: left;
+        min-height: 2em;
+        width: 30%;
+        padding-left: 2em;
+    }
+    .small-left-side-menu h6{
+        color: rgb(109, 109, 109) !important;
+    }
+}
+
+@media (max-width: 680px) {
+    h3{
+        font-size: medium;
+        font-weight: bold;
+    }
+}
+
+@media (max-width: 400px){
+
+    .topbar-navigation{
+        padding-right: 0.5em;
+    }
+    .topbar-navigation li{
+        width: 4.2em;
+    }
+}

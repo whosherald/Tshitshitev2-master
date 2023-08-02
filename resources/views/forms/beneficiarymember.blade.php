@@ -18,23 +18,48 @@
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"  id="app-stylesheet" />
         <link href="assets/libs/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
-
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <style>
+            body{
+                background: #e6e4e4;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
 
+            #beneficiary-update-form{
+                /* border: 3px solid black; */
+                background: white;
+                height: auto;
+                padding: 1em 2em;
+                border-radius: 1em;
+                box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
+                -webkit-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
+                -moz-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
+                margin-bottom: 2em;
+            }
+        </style>
+        {{-- <link href="public\assets\css\beneficiarymember.css" rel="stylesheet"/> --}}
     </head>
-    <body style="overflow-x: hidden">
-        <form class="container p-4">
+
+    <body style="overflow-x: hidden;">
+        <div style="width:85%;">
+            <a href="{{('/member-capture')}}" style="float: left;text-decoration: none; margin-bottom:1em; font-size: 1.5em ">BACK</a>
+        </div>
+        <form class="container p-4" id="beneficiary-update-form">
             {!! csrf_field() !!}
             <input type="hidden" name="section" value="section4">
-            <h3>Beneficiary Details</h3>
-            <div class="row">
+            <h3 class="mb-2">Beneficiary Details</h3>
+            <hr style="margin-bottom:2em">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Title:<span class="text-danger">*</span> </label>
-                        <div class="col-md-8">
-
-                            <select id="bd_title" name="bd_title" class="required form-control"style="margin-left:130px ! important">
-                                <option value="">Title</option>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Title:</label>
+                            <select id="bd_title" name="bd_title" class="required form-control"style="width: 70%; margin-left: 10px;">
+                                <option value="">{{ $data->bd_title }}</option>
                                 <option value="Mr">Mr</option>
                                 <option value="Mrs">Mrs</option>
                                 <option value="Dr">Dr</option>
@@ -48,11 +73,10 @@
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label"> Relationship:</label>
-                        <div class="col-md-8">
-
-                            <select id="bd_relationship" name="bd_relationship" class="required form-control"style="margin-left:130px ! important">
-                                <option value="">select</option>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Relationship:</label>
+                            <select id="bd_relationship" name="bd_relationship" class="required form-control"style="width: 70%; margin-left: 10px;">
+                                <option value="">{{ $data->bd_relationship }}</option>
                                 <option value="Spouse">Spouse</option>
                                 <option value="child">child</option>
                                 <option value="father or mother">father or mother</option>
@@ -65,86 +89,84 @@
                 </div>
             </div><!-- end row -->
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Full names:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="bd_fullnames" name="bd_fullnames" type="text"style="margin-left:130px ! important">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Full names:</label>
+                            <input class="required form-control" id="bd_fullnames" name="bd_fullnames" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_fullnames }}>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Surname:</label>
-                        <div class="col-md-8">
-                            <input id="bd_surname" name="bd_surname" type="text" class="required form-control"style="margin-left:130px ! important">
-
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end row -->
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">ID No:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="bd_id_number" name="bd_id_number" type="text"style="margin-left:130px ! important">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Date of Birth:</label>
-                        <div class="col-md-8">
-                            <input id="bd_date_of_birth" name="bd_date_of_birth" type="date" class="required form-control"style="margin-left:130px ! important">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Surname:</label>
+                            <input id="bd_surname" name="bd_surname" type="text" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_surname }}>
 
                         </div>
                     </div>
                 </div>
             </div><!-- end row -->
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Cellphone:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="bd_cellphone" name="bd_cellphone" type="text"style="margin-left:130px ! important">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">ID No:</label>
+                            <input class="required form-control" id="bd_id_number" name="bd_id_number" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_id_number }}>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Email Address:</label>
-                        <div class="col-md-8">
-                            <input id="bd_email" name="bd_email" type="text" class="required form-control"style="margin-left:130px ! important">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Date of Birth:</label>
+                            <input id="bd_date_of_birth" name="bd_date_of_birth" type="date" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_date_of_birth }}>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end row -->
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <div class="form-group clearfix">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Cellphone:</label>
+                            <input class="required form-control" id="bd_cellphone" name="bd_cellphone" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_cellphone }}>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group clearfix">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Email Address:</label>
+                            <input id="bd_email" name="bd_email" type="text" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_email }}>
 
                         </div>
                     </div>
                 </div>
             </div><!-- end row -->
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Initials:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="bd_initials" name="bd_initials" type="text"style="margin-left:130px ! important">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Initials:</label>
+                            <input class="required form-control" id="bd_initials" name="bd_initials" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_initials }}>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Gender</label>
-                        <div class="col-md-8">
-
-                            <select id="bd_gender" name="bd_gender" class="required form-control"style="margin-left:130px ! important">
-                                <option value=""></option>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Gender:</label>
+                            <select id="bd_gender" name="bd_gender" class="required form-control"style="width: 70%; margin-left: 10px;">
+                                <option value="">{{ $data->bd_gender }}</option>
                                 <option value="F">Female</option>
                                 <option value="M">Male</option>
                                 <option value="other">Other</option>
@@ -154,25 +176,17 @@
                 </div>
             </div><!-- end row -->
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Work Tell: </label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="bd_work_tell" name="bd_work_tell" type="text"style="margin-left:130px ! important">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Work Tell:</label>
+                            <input class="required form-control" id="bd_work_tell" name="bd_work_tell" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->bd_work_tell }}>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Percentage:</label>
-                        <div class="col-md-8">
-                            <input id="bd_percentage" name="bd_percentage" type="number" class="required form-control"style="margin-left:130px ! important">
 
-                        </div>
-                    </div>
-                </div>
             </div><!-- end row -->
 
 
@@ -267,9 +281,13 @@
 
             <script>
                 console.log("member", <?php echo $data?>);
+
+
+
                 document.addEventListener("DOMContentLoaded", function() {
                     var updateButton = document.getElementById("Update1");
-                    updateButton.addEventListener("click", function() {
+
+                    updateButton.addEventListener("click", function() {console.log("1");
                         var id = <?php echo $data->bd_id; ?>;
                         var title = document.getElementById('bd_title').value;
                         var relationship = document.getElementById('bd_relationship').value;
@@ -282,7 +300,6 @@
                         var initials = document.getElementById('bd_initials').value;
                         var gender = document.getElementById('bd_gender').value;
                         var workTell = document.getElementById('bd_work_tell').value;
-                        var percentage = document.getElementById('bd_percentage').value;
 
                         var beneficiaryMember = {
                             _token: document.querySelector('input[name="_token"]').value,
@@ -297,28 +314,26 @@
                             bd_email: email, //6
                             bd_initials: initials,
                             bd_gender: gender,  //4
-                            bd_work_tell: workTell, //5
-                            bd_percentage: percentage
+                            bd_work_tell: workTell
                         };
                         console.log("extend", beneficiaryMember)
                         fetch(`/member-capture/${id}`, {
                             method: 'PUT',
                             headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': beneficiaryMember._token // Include the CSRF token header
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': beneficiaryMember._token, // Include the CSRF token header
                             },
-                            body: JSON.stringify(beneficiaryMember)
+                            body: JSON.stringify(beneficiaryMember),
                         })
                         .then(function(response) {
-                            return response.json();
+                        return response.json();
                         })
                         .then(function(response) {
-                            // console.log("input", response.input);
-                            console.log("Beneficiary member update", response);
-                            window.location.href = '/member-capture';
+                        console.log('Beneficiary member update', response);
+                        window.location.href = '/member-capture';
                         })
                         .catch(function(error) {
-                            console.log(error);
+                        console.log(error);
                         });
                     });
                 });

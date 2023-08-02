@@ -8,31 +8,31 @@
     padding: 40px;
     width: 70%;
     min-width: 300px;
-  }
+}
 
-  h1 {
+h1 {
     text-align: center;
-  }
+}
 
-  input {
+input {
     padding: 10px;
     width: 100%;
     font-size: 17px;
     font-family: Raleway;
     border: 1px solid #aaaaaa;
-  }
+}
 
   /* Mark input boxes that gets an error on validation: */
-  input.invalid {
+input.invalid {
     background-color: #ffdddd;
-  }
+}
 
   /* Hide all steps by default: */
-  .tab {
+.tab {
     display: none;
-  }
+}
 
-  button {
+button {
     background-color: #04AA6D;
     color: #ffffff;
     border: none;
@@ -40,18 +40,18 @@
     font-size: 17px;
     font-family: Raleway;
     cursor: pointer;
-  }
+}
 
-  button:hover {
+button:hover {
     opacity: 0.8;
-  }
+}
 
-  #prevBtn {
+#prevBtn {
     background-color: #bbbbbb;
-  }
+}
 
   /* Make circles that indicate the steps of the form: */
-  .step {
+.step {
     height: 15px;
     width: 15px;
     margin: 0 2px;
@@ -60,86 +60,58 @@
     border-radius: 50%;
     display: inline-block;
     opacity: 0.5;
-  }
+}
 
-  .step.active {
+.step.active {
     opacity: 1;
-  }
+}
 
   /* Mark the steps that are finished and valid: */
-  .step.finish {
+.step.finish {
     background-color: #04AA6D;
-  }
+}
 
-  .navbar-custom{
+.progress{
     display: flex;
-    align-items:center ;
-    justify-content: space-between;
-  }
-  .navbar-custom{
-    background: rgba(240, 240, 240, 0.479);
-    /* color: #8f2901; */
-  }
-
-  .left-side-menu{
-    background: #003B73;
-    border-start-end-radius: 0.5em;
-  }
-  .left-side-menu i{
-    color: rgb(255, 255, 255);
-  }
-
-  .topbar-navigation{
-    margin-right: 1em;
-    background: white;
-    border-radius: 2em;
-    height: 70%;
-    display: flex;
-    align-items: center;
-    border: 2px solid #003B73;
-    color: rgb(0, 0, 0);
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.582);
-  }
-
-  i{
-    color: rgb(0, 0, 0);
-  }
-
-  .progress{
+    flex-direction: column;
     height: 16em;
     gap: 0.5em;
     background: none;
     /* border:1px solid #003B73; */
-  }
+}
 
-  .progress-row{
+.progress-row{
     display: flex;
     height: 45%;
-    justify-content: space-around;
-  }
+    width: 100%;
+    justify-content: start;
+    gap: 1em;
+    /* border:1px solid #730000; */
+}
 
-  .progress-row .process{
+.progress-row .process{
     font-size: 1.7em;
-  }
+}
 
-  .progress-row .box-top{
-    width:30%;
-  }
-  .progress-row .box-bottom{
-    width:22%;
+.progress-row .box-top{
+    width:24%;
+}
+.progress-row .box-bottom{
+    width:24%;
     height: 95%;
-  }
-  .progress-row .process .box-top-no{
-    width:10%;
-    height:60%;
-  }
-  .progress-row .process .box-bottom-no{
+}
+.progress-row .process .box-top-no{
     width:15%;
     height:60%;
-  }
+}
+.progress-row .process .box-bottom-no{
+    width:15%;
+    height:60%;
+}
 
-  #wizard-validation-form {
+#wizard-validation-form {
     /* border: 3px solid black; */
+    background: white;
     height: auto;
     padding: 1em 2em;
     border-radius: 1em;
@@ -147,9 +119,9 @@
     -webkit-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
     -moz-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
     margin-bottom: 2em;
-  }
+}
 
-  .btn_round {
+.btn_round {
     width: 35px;
     height: 35px;
     display: inline-block;
@@ -227,9 +199,35 @@
     /* color: #f5f5f5ab; */
 }
 
+#datatable td {
+    white-space: nowrap; /* Prevent text wrapping to next line */
+    overflow: hidden; /* Hide the overflowing content */
+    text-overflow: ellipsis; /* Add ellipsis for text overflow */
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+/* Style the custom label as the button */
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Optional: Add some styles to make the icon align nicely */
+.custom-file-input i {
+    margin-right: 5px;
+}
+
 @media screen and (min-width: 850px) and (max-width: 1200px) {
     .progress-row .process .box-top-no{
-        width:15%;
+        width:22%;
         height:60%;
     }
     .progress-row .process .box-bottom-no{
@@ -239,12 +237,8 @@
 }
 
 @media screen and (min-width: 500px) and (max-width: 850px) {
-    .navbar-custom{
-        display: flex;
-        justify-content: center;
-    }
     .progress-row .process .box-top-no{
-        width:20%;
+        width:30%;
         height:60%;
     }
     .progress-row .process .box-bottom-no{
@@ -254,10 +248,6 @@
 }
 
 @media (max-width: 680px) {
-    .navbar-custom{
-        display: flex;
-        justify-content: space-around;
-    }
     .progress{
         height: auto;
         width: 95%;
@@ -284,12 +274,8 @@
         width:15%;
         height:60%;
     }
-
-    h3{
-        font-size: medium;
-        font-weight: bold;
-    }
     #wizard-validation-form {
         width: 100%;
     }
 }
+

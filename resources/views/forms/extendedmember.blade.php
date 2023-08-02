@@ -18,22 +18,46 @@
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"  id="app-stylesheet" />
         <link href="assets/libs/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
-
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <style>
+            body{
+                background: #e6e4e4;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
 
+            #extended-update-form{
+                background: white;
+                height: auto;
+                padding: 1em 2em;
+                border-radius: 1em;
+                box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
+                -webkit-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
+                -moz-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.47);
+                margin-bottom: 2em;
+            }
+        </style>
+        {{-- <link href="public\assets\css\extendedmember.css" rel="stylesheet"/> --}}
     </head>
-    <body style="overflow-x: hidden">
-        <form class="container p-4">
+
+    <body style="overflow-x: hidden;">
+        <div style="width:85%;">
+            <a href="{{('/member-capture')}}" style="float: left; text-decoration: none; margin-bottom:0.5em; font-size: 1.5em ">BACK</a>
+        </div>
+        <form class="container p-4" id="extended-update-form">
             {!! csrf_field() !!}
-            <input type="hidden" name="section" value="section3">
-            <h3>Extended Member</h3>
-            <div class="row">
+            <input type="hidden" name="section" value="section4">
+            <h3 class="mb-2">Extended Member</h3>
+            <hr style="margin-bottom:2em">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Title:<span class="text-danger">*</span> </label>
-                        <div class="col-md-8">
-
-                            <select id="emtitle" name="emtitle" class="required form-control"style="margin-left:130px ! important" placeholder=>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Title:</label>
+                            <select id="emtitle" name="emtitle" class="required form-control"style="width: 70%; margin-left: 10px;">
                                 <option value="">{{ $data->emtitle }}</option>
                                 <option value="Mr">Mr</option>
                                 <option value="Mrs">Mrs</option>
@@ -48,10 +72,9 @@
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label"> Relationship:</label>
-                        <div class="col-md-8">
-
-                            <select id="emrelationship" name="emrelationship" class="required form-control"style="margin-left:130px ! important" placeholder=>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Relationship:</label>
+                            <select id="emrelationship" name="emrelationship" class="required form-control"style="width: 70%; margin-left: 10px;">
                                 <option value="">{{ $data->emrelationship }}</option>
                                 <option value="Spouse">Spouse</option>
                                 <option value="child">child</option>
@@ -59,97 +82,122 @@
                                 <option value="sibling">sibling</option>
                                 <option value="Free extended">Free extended</option>
 
-
                             </select>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><!-- end row -->
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Full names:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="emfullname" name="emfullname" type="text"style="margin-left:130px ! important" placeholder={{ $data->emfullname }}>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Full names:</label>
+                            <input class="required form-control" id="emfullname" name="emfullname" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emfullname }}>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Surname:</label>
-                        <div class="col-md-8">
-                            <input id="emsurname" name="emsurname" type="text" class="required form-control"style="margin-left:130px ! important" placeholder={{ $data->emsurname }}>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Surname:</label>
+                            <input id="emsurname" name="emsurname" type="text" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emsurname }}>
 
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><!-- end row -->
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">ID No:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="emid_number" name="emid_number" type="text"style="margin-left:130px ! important" placeholder={{ $data->emid_number }}>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Date of Birth:</label>
-                        <div class="col-md-8">
-                            <input id="emdate_of_birth" name="emdate_of_birth" type="date" class="required form-control"style="margin-left:130px ! important" placeholder={{ $data->emdate_of_birth }}>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Cellphone:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="emcellphone" name="emcellphone" type="text"style="margin-left:130px ! important" placeholder={{ $data->emcellphone }}>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">ID No:</label>
+                            <input class="required form-control" id="emid_number" name="emid_number" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emid_number }}>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Email Address:</label>
-                        <div class="col-md-8">
-                            <input id="ememail" name="ememail" type="text" class="required form-control"style="margin-left:130px ! important" placeholder={{ $data->ememail }}>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Date of Birth:</label>
+                            <input id="emdate_of_birth" name="emdate_of_birth" type="date" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emdate_of_birth }}>
 
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><!-- end row -->
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Initials:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="eminitials" name="eminitials" type="text"style="margin-left:130px ! important" placeholder={{ $data->eminitials }}>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Cellphone:</label>
+                            <input class="required form-control" id="emcellphone" name="emcellphone" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emcellphone }}>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Gender</label>
-                        <div class="col-md-8">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Email Address:</label>
+                            <input id="ememail" name="ememail" type="text" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder={{ $data->ememail }}>
 
-                            <select id="emgender" name="emgender" class="required form-control"style="margin-left:130px ! important">
-                                <option value="">{{ $data->emtitle }}</option>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end row -->
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <div class="form-group clearfix">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Initials:</label>
+                            <input class="required form-control" id="eminitials" name="eminitials" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->eminitials }}>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group clearfix">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="emgender" class="col-form-label" style="width: 30%;">Gender:</label>
+                            <select id="emgender" name="emgender" class="required form-control"style="width: 70%; margin-left: 10px;">
+                                <option value="">{{ $data->emgender }}</option>
                                 <option value="F">Female</option>
                                 <option value="M">Male</option>
-                                <option value="Other">Other</option>
+                                <option value="other">Other</option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end row -->
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <div class="form-group clearfix">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="emcover_amount" class="col-form-label" style="width: 30%;">Cover Amount:</label>
+                            <input class="required form-control" id="emcover_amount" name="emcover_amount" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emcover_amount }}>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group clearfix">
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Policy Type:</label>
+                            <select onChange="myplan()" id="empolicy_type" name="empolicy_type" class="required form-control"style="width: 70%; margin-left: 10px;">
+                                <option id="producttype"  readonly name="product_type" value="">{{ $data->empolicy_type }}</option>
+                                <option id="producttype"  readonly name="product_type" value="plan_A ">plan_A</option>
+                                <option id="producttype"  readonly name="product_type" value="plan_B ">plan_B</option>
+                                <option id="producttype"  readonly name="product_type" value="plan_C ">plan_C</option>
+                                <option id="producttype"  readonly name="product_type" value="plan_D ">plan_D</option>
+                            </select>
+
                         </div>
                     </div>
                 </div>
@@ -158,52 +206,18 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Cover Amount: </label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="emcover_amount" name="emcover_amount" type="number"style="margin-left:130px ! important" placeholder={{ $data->emcover_amount }}>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-                <div class="col-sm-6">
-                    <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label">Policy Type:</label>
-                        <div class="col-md-8">
-
-                            <select onChange="myplan()" id="empolicy_type" name="empolicy_type" class="required form-control"style="margin-left:130px ! important" placeholder={{ $data->empolicy_type }}>
-
-
-                                <option id="producttype"  readonly name="product_type" value="ju"></option>
-
-
-                            </select>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group clearfix">
-                        <label for="userName2"class="col-md-5 col-form-label">Add Premium:</label>
-                        <div class="col-md-8">
-                            <input class="required form-control" id="emadd_premium" name="emadd_premium" type="text"style="margin-left:130px ! important" placeholder={{ $data->emadd_premium }}>
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Add Premium:</label>
+                            <input class="required form-control" id="emadd_premium" name="emadd_premium" type="text"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emadd_premium }}>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group clearfix">
-                        <label for="password2"class="col-md-5 col-form-label"> Total Premium:</label>
-                        <div class="col-md-8">
-                            <input id="emtotal_premium" name="emtotal_premium" type="number" class="required form-control"style="margin-left:130px ! important" placeholder={{ $data->emtotal_premium }}>
-
+                        <div class="col-md-12 d-flex align-items-center" style="gap:1em">
+                            <label for="tellphone" class="col-form-label" style="width: 30%;">Total Premium:</label>
+                            <input id="emtotal_premium" name="emtotal_premium" type="number" class="required form-control"style="width: 70%; margin-left: 10px;" placeholder={{ $data->emtotal_premium }}>
                         </div>
                     </div>
                 </div>
@@ -275,7 +289,7 @@
                         .then(function(response) {
                             // console.log("input", response.input);
                             console.log("Extended member update", response);
-                            window.location.href = '/member-capture';
+                            // window.location.href = '/member-capture';
                         })
                         .catch(function(error) {
                             console.log(error);

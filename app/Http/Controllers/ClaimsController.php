@@ -8,9 +8,10 @@ use App\Models\Cliamant_Bank_Model;
 use App\Models\Deceased_model;
 use App\Models\In_Progress_Model;
 use App\Models\Complete_Progress_Model;
+use App\Models\Main_Member;
 use DB;
 use Session;
-session_start();
+// session_start();
 
 class ClaimsController extends Controller
 {
@@ -19,26 +20,27 @@ class ClaimsController extends Controller
      */
     public function index()
     {
-
+        // $this->flush();
+        // request()->session()->regenerateToken();
         if(Session::get('memberClaims_formCompleted') == true){
             request()->session()->regenerateToken();
         }
         //Initialisation
         //section1
         // $mainMemberId='false';
-        $mainMemberId=5;
+        $mainMemberId=null;
         $claims = null;
         $sectionOne=false;
         $section=1;
         $nextState=0;
         $mainMember=null;
         //section2
-        $cliamant_bank=null;
+        $claims=null;
         //section3
         $deceased=null;
         //section4
-        $claims=null;
-        //section5
+        $cliamant_bank=null;
+
 
         if(Session::has('memberClaims_mainMemberId')){ //if not inprogress but have not completed form during refresh
             $mainMemberId = Session::get('memberClaims_mainMemberId'); //get mainmemberid
@@ -61,18 +63,18 @@ class ClaimsController extends Controller
         if ($mainMemberId !='false') {
 
             $mainMember = $mainMember = DB::table('main_member')->where('mm_id', $mainMemberId)->first();
-            $saleRep = DB::table('sales_representative')->where('sales_rep_id', $mainMember->sales_rep_id)->first();
 
             if($mainMember){$sectionOne=true;}
             else{$sectionOne=false;}
 
             //section 1
-            $claims = DB::table('claims')->where('mm_id', $mainMemberId)->first();
+
             //section 2
-            $cliamant_bank = DB::table('cliamant_bank')->where('mm_id', $mainMemberId)->first();
+            $claims = DB::table('claims')->where('mm_id', $mainMemberId)->first();
             //section 3
             $deceased= DB::table('Deceased')->where('mm_id', $mainMemberId)->first();
             //section 4
+            $cliamant_bank = DB::table('cliamant_bank')->where('mm_id', $mainMemberId)->first();
         }
 
 
@@ -80,8 +82,8 @@ class ClaimsController extends Controller
             'mainMemberId' => $mainMemberId,
             'mainMember' => $mainMember,
             'claims' => $claims,
-            'cliamant_bank' => $cliamant_bank,
             'deceased' => $deceased,
+            'cliamant_bank' => $cliamant_bank,
             'sectionOne' => $sectionOne,
             'section' => $section,
             'nextState'=>$nextState,
@@ -107,79 +109,82 @@ class ClaimsController extends Controller
         $input = $request->except('_token', 'section','nextState');
         Session::put('memberClaims_formCompleted', false);
 
-        // Session::put('section', $section);
-        $mainMemberId = Session::get('memberClaims_mainMemberId'); // Retrieve mainMemberId from session
+        $permission=false;
+         // Retrieve mainMemberId from session
+        $idNumber= $request->input('id_number');
 
+        if($this->formPermission($idNumber)){
+            $permission=true;
+            $mainMemberId = Session::get('memberClaims_mainMemberId');
 
-        if ($section === 'section1') {
-            // Process section 2 data
-            // **********figure how to get the main-memberid
-            $section=1;
-            $claims = new Claims_model();
-            $claims->fill($input);
-            $claims->mm_id = $mainMemberId;
-            $claims->claim_choose_file = isset($input['claim_choose_file']) ? true : false;
-            $claims->save();
-
-            //making it to be in progress by default
-            $inProgress = In_Progress_Model::where('form', 'claims')->where('main_member_id', $mainMemberId)->first();
-            if (!$inProgress) {
-                $inProgress = new In_Progress_Model();
-                $inProgress->fill([
-                    'main_member_id' => $mainMemberId,
-                    'form' => 'claims'
-                ]);
-                $inProgress->save();
-            }
-
-            Session::put('memberClaims_mainMemberId', $mainMemberId);
-            Session::put('memberClaims_sectionOne', true);
-
-        }
-        if ($section === 'section2') {
-            // Process section 5 data
-            $section=2;
-            $claims_bank = new Cliamant_Bank_Model();
-            $claims_bank->fill($input);
-            $claims_bank->mm_id = $mainMemberId;
-
-            $claims_bank->save();
-        }
-        if ($section === 'section3') {
-            // Process section 6 data
-            $section=3;
-            $deceased = new Deceased_model();
-            $deceased->fill($input);
-            $deceased->mm_id = Session::get('memberClaims_mainMemberId');
-            $deceased->save();
-        }
-        if ($section === 'section4') {
-            // Process section 4 data
-            $section=4;
-            if($nextState == 1){ //if you go out of bound of the form, the form is completed
-                $mainMemberIdExists = Complete_Progress_Model::where('form', 'claims')->where('main_member_id', $mainMemberId)->exists();
-
-                if (!$mainMemberIdExists) {
-                    $completedProgressMembers = new Complete_Progress_Model();
-                    $completedProgressMembers->fill([
+            if ($section === 'section1') {
+                // Process section 2 data
+                // **********figure how to get the main-memberid
+                $section=1;
+                //making it to be in progress by default
+                $inProgress = In_Progress_Model::where('form', 'claims')->where('main_member_id', $mainMemberId)->first();
+                if (!$inProgress) {
+                    $inProgress = new In_Progress_Model();
+                    $inProgress->fill([
                         'main_member_id' => $mainMemberId,
                         'form' => 'claims'
                     ]);
-                    $completedProgressMembers->save();
+                    $inProgress->save();
                 }
-                In_Progress_Model::where('form', 'claims')->where('main_member_id', $mainMemberId)->delete();
 
-                //restarting the form
-                Session::flush();
-                Session::put('memberClaims_formCompleted', true);
+                Session::put('memberClaims_mainMemberId', $mainMemberId);
+                Session::put('memberClaims_sectionOne', true);
+            }
+            if ($section === 'section2') {
+                // Process section 5 data
+                $section=2;
+                $claims = new Claims_model();
+                $claims->fill($input);
+                $claims->mm_id = $mainMemberId;
+                $claims->claim_choose_file = isset($input['claim_choose_file']) ? true : false;
+                $claims->save();
+            }
+            if ($section === 'section3') {
+                // Process section 6 data
+                $section=3;
+                $deceased = new Deceased_model();
+                $deceased->fill($input);
+                $deceased->mm_id = Session::get('memberClaims_mainMemberId');
+                $deceased->save();
+            }
+            if ($section === 'section4') {
+                // Process section 4 data
+                $section=4;
+                $claims_bank = new Cliamant_Bank_Model();
+                $claims_bank->fill($input);
+                $claims_bank->mm_id = $mainMemberId;
+                $claims_bank->save();
 
-                $response = [
-                    'message' => 'Data saved for section ' . $section,
-                    'section' => $section,
-                    'input' => $input,
-                    'nextState' => $nextState,
-                ];
-                return response()->json($response);
+                if($nextState == 1){ //if you go out of bound of the form, the form is completed
+                    $mainMemberIdExists = Complete_Progress_Model::where('form', 'claims')->where('main_member_id', $mainMemberId)->exists();
+
+                    if (!$mainMemberIdExists) {
+                        $completedProgressMembers = new Complete_Progress_Model();
+                        $completedProgressMembers->fill([
+                            'main_member_id' => $mainMemberId,
+                            'form' => 'claims'
+                        ]);
+                        $completedProgressMembers->save();
+                    }
+                    In_Progress_Model::where('form', 'claims')->where('main_member_id', $mainMemberId)->delete();
+
+                    //restarting the form
+                    $this->flush();
+                    Session::put('memberClaims_formCompleted', true);
+
+                    $response = [
+                        'message' => 'Data saved for section ' . $section,
+                        'section' => $section,
+                        'input' => $input,
+                        'nextState' => $nextState,
+                    ];
+                    return response()->json($response);
+                }
             }
         }
 
@@ -193,6 +198,7 @@ class ClaimsController extends Controller
             'input' => $input,
             'sectionOne' => $sectionOne,
             'nextState' => $nextState,
+            'permission' => $permission,
         ];
         return response()->json($response);
     }
@@ -223,58 +229,9 @@ class ClaimsController extends Controller
         $input = $request->except('_token', 'section','nextState');
         $mainMemberId = Session::get('memberClaims_mainMemberId');
 
-        // if($id == 0){ //if on verification form and one of the section buttons have been pressed
-        //     if ($section === 'section1') {
-        //         // Process section 5 data
-        //         $section=1;
-        //     }
-        //     elseif ($section === 'section2') {
-        //         // Process section 5 data
-        //         $section=2;
-        //     }
-        //     elseif ($section === 'section3') {
-        //         // Process section 6 data
-        //         $section=3;
-        //     }
-        //     elseif ($section === 'section4') {
-        //         // Process section 7 data
-        //         $section=4;
-        //     }
-
-        //     $sectionOne= true;
-        //     Session::put('currentSection', $section); //if reload page on a section the currentTab=$section-1
-        //     Session::put('nextState', $nextState);
-        //     Session::put('sectionOne', true);
-
-        //     $response = [
-        //         'message' => 'Data updated for section ' . $section,
-        //         'section' => $section,
-        //         'mainMemberId' => $mainMemberId,
-        //         'input' => $input,
-        //         'id' => $id,
-        //         'sectionOne' => $sectionOne,
-        //         'nextState' => $nextState,
-        //     ];
-        //     Session::put('formCompleted', false);
-        //     return response()->json($response);
-        // }
-        //if not on the verification page
-
         if ($section === 'section1') {
             // Process section 1 data
             $section=1;
-            $claims = Claims_model::where('mm_id', $mainMemberId)->first();
-            $data=$claims;
-            if ($claims) {
-                // $input = array_intersect_key($input, (array) $policyDetails);
-                $input = array_filter($input, function ($value, $key) use ($claims) {
-                    return !is_null($value) && (!isset($claims->$key) || $value !== $claims->$key);
-                }, ARRAY_FILTER_USE_BOTH);
-                // DB::table('policy_details')->where('mm_id', $mainMemberId)->update($input);
-                $claims->claim_choose_file = isset($input['claim_choose_file']) ? 1 : 0;
-                $claims->update($input);
-            }
-
             $inProgress = In_Progress_Model::where('form', 'claims')->where('main_member_id', $mainMemberId)->first();
             if (!$inProgress) {
                 $inProgress = new In_Progress_Model();
@@ -287,16 +244,14 @@ class ClaimsController extends Controller
 
         }elseif ($section === 'section2') {
             $section=2;
-            // $policyDetails = DB::table('policy_details')->where('mm_id', $mainMemberId)->first();
-            $claims_bank = Cliamant_Bank_Model::where('mm_id', $mainMemberId)->first();
-            $data=$claims_bank;
-            if ($claims_bank) {
-                // $input = array_intersect_key($input, (array) $policyDetails);
-                $input = array_filter($input, function ($value, $key) use ($claims_bank) {
-                    return !is_null($value) && (!isset($claims_bank->$key) || $value !== $claims_bank->$key);
+            $claims = Claims_model::where('mm_id', $mainMemberId)->first();
+            $data=$claims;
+            if ($claims) {
+                $input = array_filter($input, function ($value, $key) use ($claims) {
+                    return !is_null($value) && (!isset($claims->$key) || $value !== $claims->$key);
                 }, ARRAY_FILTER_USE_BOTH);
-                // DB::table('policy_details')->where('mm_id', $mainMemberId)->update($input);
-                $claims_bank->update($input);
+                $claims->claim_choose_file = isset($input['claim_choose_file']) ? 1 : 0;
+                $claims->update($input);
             }
         }
         elseif ($section === 'section3') {
@@ -304,26 +259,22 @@ class ClaimsController extends Controller
             $deceased = Deceased_model::where('mm_id', $mainMemberId)->first();
             $data=$deceased;
             if ($deceased) {
-                // $input = array_intersect_key($input, (array) $policyDetails);
                 $input = array_filter($input, function ($value, $key) use ($deceased) {
                     return !is_null($value) && (!isset($deceased->$key) || $value !== $deceased->$key);
                 }, ARRAY_FILTER_USE_BOTH);
-                // DB::table('policy_details')->where('mm_id', $mainMemberId)->update($input);
                 $deceased->update($input);
             }
         }
         elseif ($section === 'section4') {
             $section=4;
-            // $policyDetails = Policy_Details_Model::where('mm_id', $mainMemberId)->first();
-            // $data=$policyDetails;
-            // if ($policyDetails) {
-            //     // $input = array_intersect_key($input, (array) $policyDetails);
-            //     $input = array_filter($input, function ($value, $key) use ($policyDetails) {
-            //         return !is_null($value) && (!isset($policyDetails->$key) || $value !== $policyDetails->$key);
-            //     }, ARRAY_FILTER_USE_BOTH);
-            //     // DB::table('policy_details')->where('mm_id', $mainMemberId)->update($input);
-            //     $policyDetails->update($input);
-            // }
+            $claims_bank = Cliamant_Bank_Model::where('mm_id', $mainMemberId)->first();
+            $data=$claims_bank;
+            if ($claims_bank) {
+                $input = array_filter($input, function ($value, $key) use ($claims_bank) {
+                    return !is_null($value) && (!isset($claims_bank->$key) || $value !== $claims_bank->$key);
+                }, ARRAY_FILTER_USE_BOTH);
+                $claims_bank->update($input);
+            }
         }
 
         $sectionOne= true;
@@ -362,13 +313,13 @@ class ClaimsController extends Controller
         $mainMemberIdExists = false;
 
         if ($section === 1 || $section === 'section1') {
-            $model = Claims_model::class;
+            // $model = Cliamant_Bank_Model::class;
         } elseif ($section === 2 || $section === 'section2') {
-            $model = Cliamant_Bank_Model::class;
+            $model = Claims_model::class;
         } elseif ($section === 3 || $section === 'section3') {
             $model = Deceased_model::class;
         } elseif ($section === 4 || $section === 'section4') {
-            // $model = Beneficiary_Details_Model::class;
+            $model = Cliamant_Bank_Model::class;
         }
 
         if ($model) {
@@ -394,4 +345,47 @@ class ClaimsController extends Controller
         ];
         return response()->json($response);
     }
+
+    public function formPermission($idNumber){
+        $formPermission=false;
+        $mainMemberId = Session::get('memberClaims_mainMemberId');
+        $formPermission= $mainMemberId ? true : $this->verifyIDNumber($idNumber);
+        return $formPermission;
+    }
+
+    public function verifyIDNumber($idNumber)
+    {
+        $isVerified = false;
+        $mainMember = Main_Member::where('id_number', $idNumber)->first();
+        if ($mainMember) {
+            $isVerified = true;
+            Session::put('memberClaims_mainMemberId', $mainMember->mm_id);
+        }
+        return $isVerified;
+    }
+
+    public function flush(){
+        $data = Session::all();
+
+        // Find the key used to store the user's authentication information
+        $authKey = null;
+        foreach ($data as $key => $value) {
+            // Check if key starts with 'login_'
+            if (str_starts_with($key, 'login_')) {
+                // This is the key used to store the user's authentication information
+                $authKey = $key;
+                break;
+            }
+        }
+
+        // Loop through session data again
+        foreach ($data as $key => $value) {
+            // Preserve authentication information
+            if ($key !== $authKey) {
+                // Remove session variable
+                Session::forget($key);
+            }
+        }
+    }
+
 }

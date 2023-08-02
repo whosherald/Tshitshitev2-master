@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//member-capture
 use App\Models\Sale_Rep_Model;
 use App\Models\Main_Member;
 use App\Models\Policy_Details_Model;
@@ -12,11 +13,19 @@ use App\Models\debit_method_model;
 use App\Models\stopOrder_payment_model;
 use App\Models\cash_payment_model;
 use App\Models\persal_payment_model;
+use App\Models\Compliance_Model;
+use App\Models\Upload_Model;
+
+//claim form
+use App\Models\Claims_model;
+use App\Models\Cliamant_Bank_Model;
+use App\Models\Deceased_model;
+
 use App\Models\In_Progress_Model;
 use App\Models\Complete_Progress_Model;
 use DB;
 use Session;
-session_start();
+// session_start();
 
 class DashboardController extends Controller
 {
@@ -35,6 +44,18 @@ class DashboardController extends Controller
         // Claims
         $claims_CompletedForm_MainMembers = [];
         $claims_InProgressForm_MainMembers = [];
+
+        $data = Session::all();
+
+        // Loop through session data
+        foreach ($data as $key => $value) {
+            // Check if key starts with 'login_'
+            if (str_starts_with($key, 'login_')) {
+                // This is the key used to store the user's authentication information
+                $authKey = $key;
+                break;
+            }
+        }
 
         //get all the main-members that completed a form
         foreach ($completedFormsTable as $table) {
@@ -87,6 +108,7 @@ class DashboardController extends Controller
             'memberCapture_InProgressForm_MainMembers' => $memberCapture_InProgressForm_MainMembers,
             'claims_CompletedForm_MainMembers' => $claims_CompletedForm_MainMembers,
             'claims_InProgressForm_MainMembers' => $claims_InProgressForm_MainMembers,
+            'authKey' => $authKey,
         ]);
 
     }
@@ -153,72 +175,50 @@ class DashboardController extends Controller
         $form = $form_Id_parts[0]; // Get the model type (e.g., 'member-capture')
         $mainMemberId = $form_Id_parts[1]; // Get the ID (e.g., '5')
 
-        // Delete the resource from In_Progress_Model if it exists
-        $inProgressModel = In_Progress_Model::where('form', $form)->where('main_member_id', $mainMemberId)->first();
-        if ($inProgressModel) {
-            //section 1
-            $mainMember = Main_Member::find($mainMemberId);
-            Sale_Rep_Model::where('sales_rep_id', $mainMember->sales_rep_id)->delete();
-
-            //section 2
-            Policy_Details_Model::where('mm_id', $mainMemberId)->delete();
-
-            //section 3
-            $extendedMembers = Capturing_Extended_Member_Model::where('mm_id', $mainMemberId)->get();
-            foreach ($extendedMembers as $extendedMember) {
-                $extendedMember->delete();
-            }
-
-            //section 4
-            $beneficiaryDetails = Beneficiary_Details_Model::where('mm_id', $mainMemberId)->get();
-            foreach ($beneficiaryDetails as $beneficiaryDetail) {
-                $beneficiaryDetail->delete();
-            }
-
-            //section 5
-            debit_method_model::where('mm_id', $mainMemberId)->delete();
-            stopOrder_payment_model::where('mm_id', $mainMemberId)->delete();
-            cash_payment_model::where('mm_id', $mainMemberId)->delete();
-            persal_payment_model::where('mm_id', $mainMemberId)->delete();
-
-            if ($mainMember) {
-                $mainMember->delete();
-            }
-            $inProgressModel->delete();
-        }
-
+        //1. CompletedTable
         $completedModel = Complete_Progress_Model::where('form', $form)->where('main_member_id', $mainMemberId)->first();
         if ($completedModel) {
-            //section 1
-            $mainMember = Main_Member::find($mainMemberId);
-            Sale_Rep_Model::where('sales_rep_id', $mainMember->sales_rep_id)->delete();
 
-            //section 2
-            Policy_Details_Model::where('mm_id', $mainMemberId)->delete();
+            if($form == 'member-capture'){ //1.1
+                //delete all forms
+                $this->deleteClaimsForm($mainMemberId);
+                $this->deleteMemberCaptureForm($mainMemberId);
+            }elseif($form == 'claims'){ //1.2
+                //delete claims forms
+                $this->deleteClaimsForm($mainMemberId);
+            }elseif($form == 'burial'){
+                //delete burial forms
 
-            //section 3
-            $extendedMembers = Capturing_Extended_Member_Model::where('mm_id', $mainMemberId)->get();
-            foreach ($extendedMembers as $extendedMember) {
-                $extendedMember->delete();
+            }elseif($form == 'mortuary'){
+                //delete mortuary forms
+
+            }elseif($form == 'tombstone'){
+                //delete tombstone forms
+
             }
-
-            //section 4
-            $beneficiaryDetails = Beneficiary_Details_Model::where('mm_id', $mainMemberId)->get();
-            foreach ($beneficiaryDetails as $beneficiaryDetail) {
-                $beneficiaryDetail->delete();
-            }
-
-            //section 5
-            debit_method_model::where('mm_id', $mainMemberId)->delete();
-            stopOrder_payment_model::where('mm_id', $mainMemberId)->delete();
-            cash_payment_model::where('mm_id', $mainMemberId)->delete();
-            persal_payment_model::where('mm_id', $mainMemberId)->delete();
-
-            if ($mainMember) {
-                $mainMember->delete();
-            }
-
             $completedModel->delete();
+        }
+
+        //2. In-ProgressTable
+        $inProgressModel = In_Progress_Model::where('form', $form)->where('main_member_id', $mainMemberId)->first();
+        if ($inProgressModel) {
+            if($form == 'member-capture'){
+                //2.2.2 delete member-capture forms
+                $this->deleteMemberCaptureForm($mainMemberId);
+            }elseif($form == 'claims'){
+                //delete claims forms
+                $this->deleteClaimsForm($mainMemberId);
+
+            }elseif($form == 'burial'){
+                //delete burial forms
+            }elseif($form == 'mortuary'){
+                //delete mortuary forms
+            }elseif($form == 'tombstone'){
+                //delete tombstone forms
+            }
+
+            //2.2.3 delete Inprogress
+            $inProgressModel->delete();
         }
 
         // Redirect back to the member-capture page with a flash message
@@ -241,5 +241,48 @@ class DashboardController extends Controller
             'message' => "done",
         ];
         return response()->json($response);
+    }
+
+    public function deleteMemberCaptureForm($mainMemberId){
+        //section 1
+        $mainMember = Main_Member::find($mainMemberId);
+        Sale_Rep_Model::where('sales_rep_id', $mainMember->sales_rep_id)->delete();
+
+        //section 2
+        Policy_Details_Model::where('mm_id', $mainMemberId)->delete();
+
+        //section 3
+        $extendedMembers = Capturing_Extended_Member_Model::where('mm_id', $mainMemberId)->get();
+        foreach ($extendedMembers as $extendedMember) {
+            $extendedMember->delete();
+        }
+
+        //section 4
+        $beneficiaryDetails = Beneficiary_Details_Model::where('mm_id', $mainMemberId)->get();
+        foreach ($beneficiaryDetails as $beneficiaryDetail) {
+            $beneficiaryDetail->delete();
+        }
+
+        //section 5
+        debit_method_model::where('mm_id', $mainMemberId)->delete();
+        stopOrder_payment_model::where('mm_id', $mainMemberId)->delete();
+        cash_payment_model::where('mm_id', $mainMemberId)->delete();
+        persal_payment_model::where('mm_id', $mainMemberId)->delete();
+
+        //section 7
+        Compliance_Model::where('mm_id', $mainMemberId)->delete();
+
+        //section 8
+        Upload_Model::where('mm_id', $mainMemberId)->delete();
+        if ($mainMember) {
+            $mainMember->delete();
+        }
+    }
+
+    public function deleteClaimsForm($mainMemberId){
+        Cliamant_Bank_Model::where('mm_id', $mainMemberId)->delete();
+        Claims_model::where('mm_id', $mainMemberId)->delete();
+        Deceased_model::where('mm_id', $mainMemberId)->delete();
+        // Cliamant_Bank_Model::where('mm_id', $mainMemberId)->delete();
     }
 }

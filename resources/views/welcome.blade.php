@@ -16,105 +16,71 @@
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"  id="app-stylesheet" />
-        <link href="../" rel="stylesheet" type="text/css"  id="app-stylesheet" />
-        <!-- MDBootstrap Datatables  -->
-
-
+        <link href="assets/css/welcome.css" rel="stylesheet"/>
     </head>
 
     <body class="authentication-bg"style="background: url('assets/images/bg.jpg');background-size: cover;background-position: center;">
-    <style>
-        .card{
-            background-color:#00aced!important;
-        }
-    </style>
 
-        <div class="account-pages pt-5 my-5">
-            <div class="container">
+        <div class="account-pages pt-2 my-5">
+            <div class="container" >
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="account-card-box">
-                            <div class="card mb-0" >
-                                <div class="card-body p-4">
+                    <div class="col-md-6 col-lg-3 col-xl-5">
 
-                                    <div class="text-center">
-                                        <div class="my-3">
-                                            <a href="index.html">
-                                                <span><img src="assets/images/logo.png" alt="" height="60"></span>
-                                            </a>
-                                        </div>
-                                        <!-- <h4 class="font-size-18 mt-2 text-center">Welcome Back !</h4>
-                                    <p class="text-muted text-center mb-4">Sign in to continue to Tshitshite Dashboard.</p> -->
-                                    {{-- @if(Session::has('fail'))
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center mt-4">
+                                    <div class="mb-3">
+                                        <a href="index.html"><img src="assets/images/logo.png" height="140" alt="logo"></a>
+                                    </div>
+                                </div>
+
+                                <div class="p-3">
+                                    <h4 class="font-size-18 mt-2 text-center">Welcome Back !</h4>
+                                    <p class="text-muted text-center mb-4">Sign in to continue to Tshitshite Dashboard.</p>
+                                    @if(Session::has('fail'))
                                         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                             <i class="mdi mdi-cancel"></i><strong> Oh snap!</strong>{{Session::get('fail')}}
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
-                                    @elseif(Session::has('success')) --}}
+                                    @elseif(Session::has('success'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-18px mdi-account-check"></i><strong> Well done! </strong>
+                                        <i class="mdi mdi-18px mdi-account-check"></i><strong> Well done! </strong>{{Session::get('success')}}
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
-                                    {{-- @endif --}}
-                                        <h5 class="text-muted text-uppercase py-3 font-16">Sign In</h5>
-                                    </div>
-
-
-                                    <form class="mt-2" action="{{ url('/login') }}" method="post">
+                                    @endif
+                                    <form class="form-horizontal" action="{{ url('/login') }}" method="post">
                                     @csrf
-                                        <!-- <div class="form-group mb-3">
-                                            <input class="form-control" type="text" required="" placeholder="Enter your username">
-                                        </div> -->
-                                        <div class="form-group mb-3">
-                                            <!-- <label class="form-label" for="username">Email</label> -->
-                                            <input type="text" class="form-control"required="" name="email" id="username" placeholder="Enter email">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="username">Email</label>
+                                            <input type="text" class="form-control" name="email" id="username" placeholder="Enter email"style="border-radius:20rem ! important;">
                                         </div>
 
-                                        <div class="form-group mb-3">
-                                            <input class="form-control" type="password" required="" name="password" id="userpassword" placeholder="Enter your password">
-
+                                        <div class="mb-3">
+                                            <label class="form-label" for="userpassword">Password</label>
+                                            <input type="password" name="password" class="form-control" id="userpassword" placeholder="Enter password"style="border-radius:20rem ! important;">
                                         </div>
 
-                                        <div class="form-group mb-3">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked>
-                                                <label class="custom-control-label" for="checkbox-signin">Remember me</label>
+                                        <div class="row mt-4 align-items-center">
+                                            <div class="col-sm-6">
+                                                <a href="{{ url('/register') }}" style="background: rgb(0, 173, 130); padding:0.5em; color:white; border-radius:0.5em">Register</a>
+
+                                            </div>
+                                            <div class="col-sm-6 text-end">
+                                                <button class="btn btn-primary w-md waves-effect waves-light" type="submit" style="border-radius:25rem ! important;margin-left:59%">Log In</button>
                                             </div>
                                         </div>
 
-                                        <div class="form-group text-center">
-                                            <button class="btn btn-success btn-block waves-effect waves-light" type="submit"> Log In </button>
+                                        <div class="mb-0 row">
+                                            <div class="col-12 mt-4">
+                                                <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                            </div>
                                         </div>
-
-                                        <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot your password?</a>
-
                                     </form>
 
-                                    <div class="text-center mt-4">
-                                        <h5 class="text-muted py-2"><b>Sign in with</b></h5>
+                                </div>
 
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <button type="button" class="btn btn-facebook waves-effect font-14 waves-light mt-3">
-                                                    <i class="fab fa-facebook-f mr-1"></i> Facebook
-                                                </button>
 
-                                                <button type="button" class="btn btn-twitter waves-effect font-14 waves-light mt-3">
-                                                    <i class="fab fa-twitter mr-1"></i> Twitter
-                                                </button>
-
-                                                <button type="button" class="btn btn-googleplus waves-effect font-14 waves-light mt-3">
-                                                    <i class="fab fa-google-plus-g mr-1"></i> Google+
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div> <!-- end card-body -->
-                            </div>
-                            <!-- end card -->
                         </div>
-
                         <div class="row mt-3">
                             <div class="col-12 text-center">
                                 <p class="text-white-50">Don't have an account? <a href="pages-register.html" class="text-white ml-1"><b>Sign Up</b></a></p>
@@ -127,6 +93,9 @@
                 <!-- end row -->
             </div>
             <!-- end container -->
+            <div class="mt-1 text-center position-relative">
+                            <p class="text-white"><script>document.write(new Date().getFullYear())</script> © Tshitshithe & Bros Funeral Undertakers.</br> Crafted with <i class="mdi mdi-heart text-danger"></i> by Tendai ICT</p>
+                        </div>
         </div>
         <!-- end page -->
 

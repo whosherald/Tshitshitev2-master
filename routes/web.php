@@ -1,10 +1,13 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemberCaptureController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TableController;
 use App\Http\Controllers\ClaimsController;
+use App\Http\Controllers\PDFController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,33 +19,35 @@ use App\Http\Controllers\ClaimsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->group(function () {
+    //Dashboard
+    Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+    //Dashboard-Tables
+    Route::get('/tables-member-capture-in-progress', [TableController::class, 'indexMemberCapture']);
+    Route::get('/tables-claims-completed', [TableController::class, 'indexClaimsCompleted']);
+    Route::get('/tables-claims-in-progress', [TableController::class, 'indexClaimsInProgress']);
+
+    // Route::delete('/dashboard/{id}', [TableController::class, 'destroyMemberCaptureTableData']);
+    // Route::delete('/dashboard/{id}', [TableController::class, 'destroyClaimsTableData']);
+
+    Route::resource('/dashboard', DashboardController::class);
+    Route::post('/dashboard/claims/{id}', [DashboardController::class, 'claims']);
+
+    //Member captures Form
+    Route::resource("/member-capture", MemberCaptureController::class)->except(['update']);
+    Route::put('/member-capture/{id}', [MemberCaptureController::class, 'update']);
+    Route::post('/check-main-member-id', [MemberCaptureController::class, 'checkMainMemberId']);
+    Route::post('/in-progress', [MemberCaptureController::class, 'inProgress']);
+    Route::get('/pdfgenerate',[PDFController::class, 'domppdf']);//pdf related
+
+    //Claims Form
+    Route::resource("/member-claim", ClaimsController::class);
+    Route::post('/check-main-member-id-claim', [ClaimsController::class, 'checkMainMemberId']);
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-// Route::get('/dashboard', function () {
-//     return view('Admin.dashboard');
-// });
-Route::resource("/dashboard", DashboardController::class);
-Route::post('/dashboard/claims/{id}', [DashboardController::class, 'claims']);
 
-Route::get('/member-captures', function () {
-    return view('forms.member_captures');
-});
-
-//Updating Section 3 & 4
-Route::get('/update_extended_member/{em_id}', function ($em_id) {
-    return view('forms.extendedmember', ['em_id' => $em_id]);
-});
-Route::get('/update_beneficiary_member/{bd_id}', function ($bd_id) {
-    return view('forms.beneficiarymember', ['bd_id' => $bd_id]);
-});
-
-Route::resource("/member-capture", MemberCaptureController::class)->except(['update']);
-Route::put('/member-capture/{id}', [MemberCaptureController::class, 'update']);
-Route::post('/check-main-member-id', [MemberCaptureController::class, 'checkMainMemberId']);
-Route::post('/in-progress', [MemberCaptureController::class, 'inProgress']);
-
-Route::get('/policy-payments', [AdminController::class, 'policy_payments']);
-
-Route::resource("/member-claim", ClaimsController::class);
-Route::post('/check-main-member-id-claim', [ClaimsController::class, 'checkMainMemberId']);
+require __DIR__.'/auth.php';
