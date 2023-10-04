@@ -18,7 +18,7 @@ use App\Models\Compliance_Model;
 use App\Models\Upload_Model;
 use DB;
 use Session;
-// session_start();
+session_start();
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
@@ -257,6 +257,7 @@ class MemberCaptureController extends Controller
                         'section' => $section,
                         'input' => $input,
                         'sectionOne' => $sectionOne,
+                        'nextState' => $nextState,
                     ];
 
                     Session::put('currentSection', $section); //if reload page on a section the currentTab=$section-1
@@ -282,6 +283,7 @@ class MemberCaptureController extends Controller
                         'message' => 'Data saved for section ' . $section,
                         'section' => $section,
                         'input' => $input,
+                        'nextState' => $nextState,
                     ];
                     return response()->json($response);
                 }
@@ -295,6 +297,7 @@ class MemberCaptureController extends Controller
                     'message' => 'Data saved for section ' . $section,
                     'section' => $section,
                     'input' => $input,
+                    'nextState' => $nextState,
                     'extendedMember' => $extendedMember, // Assuming you want to include the extended member data in the response
                 ];
                 return response()->json($response);
@@ -312,6 +315,7 @@ class MemberCaptureController extends Controller
                         'message' => 'Data saved for section ' . $section,
                         'section' => $section,
                         'input' => $input,
+                        'nextState' => $nextState,
                     ];
                     return response()->json($response);
                 }
@@ -324,6 +328,7 @@ class MemberCaptureController extends Controller
                     'message' => 'Data saved for section ' . $section,
                     'section' => $section,
                     'input' => $input,
+                    'nextState' => $nextState,
                     'beneficiaryMember' => $beneficiaryDetails, // Assuming you want to include the extended member data in the response
                 ];
                 return response()->json($response);
@@ -745,6 +750,7 @@ class MemberCaptureController extends Controller
                     'saleRepId' => $saleRepId,
                     'policyDetails' => $saleRep,
                     'sectionOne' => $sectionOne,
+                    'nextState' => $nextState,
                 ];
 
                 return response()->json($response);

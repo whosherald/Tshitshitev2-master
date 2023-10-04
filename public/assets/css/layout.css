@@ -1,51 +1,112 @@
-*{
+ *{
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
-.navbar-custom{
-    background: #e0dfdf;
+body{
+    background: #e0dede;
+}
+.overall-container{
+    width: 100%;
     display: flex;
-    align-items:center ;
+    flex-direction:row;
+    align-items: stretch;
+    gap: 0;
+}
+.dashboard-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 86.67%;
+    margin-left: 13.33%;
+    min-height: 100vh;
+    height: 100%;
+}
+
+.dashboard-container .navbar-custom{
+    top: 0;
+    background: none;
+    display: flex;
+    justify-content:end;
+    padding: 1em 1em;
+}
+
+.content-page{
+    height:90%;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
-
-body{
-    background: #e6e4e4;
-}
-
-
 .small-left-side-menu{
     display: none;
 }
 
 .left-side-menu{
-    background: #003B73;
-    border-start-end-radius: 0.5em;
+    height: 100%;
+    width: 13.33%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: #010e46;
+    -webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+.tshi-logo .sm-l{
+    display: none;
 }
 .left-side-menu a{
     text-decoration: none;
+    overflow: hidden;
+}
+.left-side-menu .navi-item{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+.left-side-menu span{
+    color: rgb(255, 255, 255);
+    flex: 4;
 }
 .left-side-menu i{
-    color: rgb(255, 255, 255);
+    color: #929fbf;
+}
+.left-side-menu .navi-item i{
+    flex: 1;
 }
 
-.topbar-navigation{
+.disappear{
+    display: block;
+}
+.navbar-custom{
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-custom .topbar-navigation{
     margin-right: 1em;
     background: white;
+    gap: 0.5em;
     border-radius: 2em;
-    height: 70%;
+    padding: 0.5em;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    border: 2px solid #003B73;
+    margin-top: 1.5em;
+    border: 2px solid #010e46;
     color: rgb(0, 0, 0);
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.582);
-}
-.topbar-navigation li{
     width: auto;
-    /* border: 2px solid #003B73; */
+}
+.metismenu .navi-item span:hover {
+    color: rgb(197, 197, 197);
 }
 
-i{
+.topbar-navigation li{
+    width: auto;
+}
+.content{
+    margin-bottom: 7%;
+}
+
+ i{
     color: rgb(0, 0, 0);
 }
 
@@ -60,21 +121,80 @@ i{
     width: 25%;
     height: 17em;
 }
-.footer{
-    background: #4d4d4d73;
-    color: white;
+.notify-item{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
 }
+.notify-item a{
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+    margin-left: 0.5em;
+}
+
+.pdfButton{
+    width:20%;
+    margin-left:55px ! important;
+    font-size: small;
+}
+
+.footer{
+    position: absolute;
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgb(116, 116, 122);
+    color: white;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    padding: 2em 1em;
+    /* border: 2px solid red; */
+}
+@media screen and (max-width: 1025px) {
+    .tshi-logo .lg-l{
+        display: none;
+    }
+    .tshi-logo .sm-l{
+        display: block;
+    }
+    .left-side-menu{
+        /* border: 4px solid red; */
+    }
+    .left-side-menu i{
+        width: 100%;
+        margin-left: 20px;
+    }
+    .dashboard-container{
+
+        /* border: 4px solid red; */
+    }
+}
+@media screen and (min-width: 850px) and (max-width: 1025px) {
+
+}
+
 @media screen and (min-width: 500px) and (max-width: 850px) {
+    .dashboard-container{
+    }
     .navbar-custom{
-        display: flex;
-        justify-content: center;
     }
 }
 
 @media (max-width: 767.98px) {
-    .navbar-custom{
+    .dashboard-container{
+        margin: 0;
+        width: 100%;
+    }
+    .dashboard-container .navbar-custom{
         display: flex;
+        flex-direction: row;
+        align-items: center;
         justify-content: space-between;
+        /* border: 1px solid red; */
     }
     .navbar-custom #side-menu a{
         text-decoration: none;
@@ -101,13 +221,11 @@ i{
 
     .small-left-side-menu{
         display: block;
-        float: left;
-        min-height: 2em;
-        width: 30%;
-        padding-left: 2em;
+        height: 30%;
+        margin-top: 1.5em;
     }
     .small-left-side-menu h6{
-        color: rgb(109, 109, 109) !important;
+        color: #c1c6db !important;
     }
 }
 
@@ -121,6 +239,21 @@ i{
     .card-items{
         width: 100%;
         height: 25%;
+    }
+    .pdfButton{
+        width:20%;
+        margin-left: 0px ! important;
+        font-size:x-small ! important;
+    }
+
+
+}
+
+@media (max-width: 410px) {
+    .pdfButton{
+        width:70%;
+        margin-left: 0px ! important;
+        font-size:xx-small ! important;
     }
 }
 

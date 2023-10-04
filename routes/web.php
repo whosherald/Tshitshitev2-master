@@ -28,15 +28,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/tables-claims-completed', [TableController::class, 'indexClaimsCompleted']);
     Route::get('/tables-claims-in-progress', [TableController::class, 'indexClaimsInProgress']);
 
-    // Route::delete('/dashboard/{id}', [TableController::class, 'destroyMemberCaptureTableData']);
-    // Route::delete('/dashboard/{id}', [TableController::class, 'destroyClaimsTableData']);
+    Route::delete('/tables-member-capture-delete/{id}', [TableController::class, 'destroyMemberCaptureTableData']);
 
     Route::resource('/dashboard', DashboardController::class);
     Route::post('/dashboard/claims/{id}', [DashboardController::class, 'claims']);
 
     //Member captures Form
-    Route::resource("/member-capture", MemberCaptureController::class)->except(['update']);
+    Route::resource("/member-capture", MemberCaptureController::class)->except(['update', 'edit']);
     Route::put('/member-capture/{id}', [MemberCaptureController::class, 'update']);
+    Route::get('/member-capture/{member_capture}/edit', [MemberCaptureController::class, 'edit'])->name('member-capture.edit');
     Route::post('/check-main-member-id', [MemberCaptureController::class, 'checkMainMemberId']);
     Route::post('/in-progress', [MemberCaptureController::class, 'inProgress']);
     Route::get('/pdfgenerate',[PDFController::class, 'domppdf']);//pdf related

@@ -32,7 +32,7 @@
                                         {{-- <h4>{{ $count_success }}/{{ $count_total }}</h4> --}}
                                     </div>
                                     <div class="card-footer d-flex" style="background-color: rgba(219, 219, 219, 0.877);">
-                                        <a href={{url('/tables-member-capture')}} style="text-decoration: none; color:black">View Details</a>
+                                        <a href={{url('/tables-member-capture-in-progress')}} style="text-decoration: none; color:black">View Details</a>
                                         </span>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                         <!-- end row -->
 
                         <div class="table-responsive card" style="width: 100%; border-radius: 0.3em ">
-                            <div class="" style="background: #FFBF00; width: 100%; min-height:10%; padding:1em 2em; ">
+                            <div class="" style="background: #010e46; width: 100%; min-height:10%; padding:1em 2em; ">
                                 <h4 style=" color: white">Member Capture Forms In Progress</h4>
                             </div>
 
@@ -92,10 +92,10 @@
                                         <td>{{ $memberCapture_InProgressForm_MainMember->surname }}</td>
                                         <td>{{ $memberCapture_InProgressForm_MainMember->id_number }}</td>
                                         <td>
-                                            <a href="/dashboard/{{ $memberCapture_InProgressForm_MainMember->mm_id }}/edit" class="btn btn-outline-info btn-sm edit" title="Edit">
+                                            <a href="/dashboard/{{ $memberCapture_InProgressForm_MainMember->mm_id }}/edit" class="btn btn-sm edit" title="Edit" style="margin-bottom: 0.5em; border: 1px solid #010e46; border-radius: 0.2em;">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMemberForm('member-capture '+{{ $memberCapture_InProgressForm_MainMember->mm_id }})">
+                                            <button type="button" class="btn btn-sm show-confirm action Actionpreload" onclick="deleteMemberForm('member-capture '+{{ $memberCapture_InProgressForm_MainMember->mm_id }})" style="margin-bottom: 0.5em; background:none;">
                                                 <i class="fa fa-trash fa-lg"></i>
                                             </button>
                                         </td>
@@ -125,7 +125,7 @@
                         console.log("memberCapture_InProgressForm_MainMembers", <?php echo json_encode($memberCapture_InProgressForm_MainMembers); ?>)
 
                         function deleteMemberForm(form_Id) {
-                            fetch('/tables-member-capture/' + form_Id, {
+                            fetch('/tables-member-capture-delete/' + form_Id, {
                                 method: 'POST',
                                 headers: {
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -141,7 +141,7 @@
                                     // Success! Refresh the page or update the UI as needed
                                     const data = await response.json();
                                     console.log("form_Id result", data);
-                                    location.reload();
+                                    // location.reload();
                                 } else {
                                     // Error handling
                                     console.log('Delete request failed with status:', response.status);
@@ -176,27 +176,6 @@
                     </script>
 
                 </div> <!-- end content -->
-
-
-
-                <!-- Footer Start -->
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Tshitshithe.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-end d-none d-sm-block">
-                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Tendani ICT
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-                <!-- end Footer -->
-
-            </div>
 
             <!-- ============================================================== -->
             <!-- End Page content -->

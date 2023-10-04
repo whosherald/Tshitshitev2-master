@@ -236,7 +236,7 @@
             </div>
 
             <script>
-                console.log("member", <?php echo $data?>);
+
                 document.addEventListener("DOMContentLoaded", function() {
                     var updateButton = document.getElementById("Update");
                     updateButton.addEventListener("click", function() {
@@ -287,9 +287,7 @@
                             return response.json();
                         })
                         .then(function(response) {
-                            // console.log("input", response.input);
-                            console.log("Extended member update", response);
-                            // window.location.href = '/member-capture';
+                            window.location.href = '/member-capture';
                         })
                         .catch(function(error) {
                             console.log(error);

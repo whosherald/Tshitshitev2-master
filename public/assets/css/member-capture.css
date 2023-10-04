@@ -2,14 +2,16 @@
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 #regForm {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     margin: 100px auto;
-    font-family: Raleway;
+    /* font-family: Raleway; */
     padding: 40px;
     width: 70%;
     min-width: 300px;
 }
-
+/* body{
+    background: #e6e4e4;
+} */
 h1 {
     text-align: center;
 }
@@ -31,9 +33,10 @@ input.invalid {
 .tab {
     display: none;
 }
+.tablestriped tr:nth-child(even){background-color: #f2f2f2;}
 
 button {
-    background-color: #04AA6D;
+    background-color: #010e46;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -47,7 +50,7 @@ button:hover {
 }
 
 #prevBtn {
-    background-color: #bbbbbb;
+    background-color: #010e46;
 }
 
   /* Make circles that indicate the steps of the form: */
@@ -213,9 +216,8 @@ button:hover {
 .custom-file-upload {
     display: inline-block;
     padding: 6px 12px;
-    background-color: #007bff;
+    background-color: #010e46;
     color: #fff;
-    border: 1px solid #007bff;
     border-radius: 4px;
     cursor: pointer;
 }

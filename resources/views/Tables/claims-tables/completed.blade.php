@@ -32,7 +32,7 @@
                                         {{-- <h4>{{ $count_success }}/{{ $count_total }}</h4> --}}
                                     </div>
                                     <div class="card-footer d-flex" style="background-color: rgba(219, 219, 219, 0.877);">
-                                        <a href={{url('/tables-member-capture')}} style="text-decoration: none; color:black">View Details</a>
+                                        <a href={{url('/tables-member-capture-in-progress')}} style="text-decoration: none; color:black">View Details</a>
                                         </span>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
 
                         <!-- end row -->
                         <div class="table-responsive card" style="width: 100%; border-radius: 0.3em ">
-                            <div class="" style="background: green; width: 100%; min-height:10%; padding:1em 2em; ">
+                            <div class="" style="background: #010e46; width: 100%; min-height:10%; padding:1em 2em; ">
                                 <h4 style=" color: white">Claims Forms Completed</h4>
                             </div>
                             <div class="" style="padding:1em 2em; min-height:90%; background:white; margin-top:0.5em">
@@ -90,10 +90,10 @@
                                             <td>{{ $claims_CompletedForm_MainMember->surname }}</td>
                                             <td>{{ $claims_CompletedForm_MainMember->id_number }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-sm btn-success show-confirm action" onclick="claimPageCompletedForm({{ $claims_CompletedForm_MainMember->mm_id }})">
+                                                <button type="button" style="margin-bottom: 0.5em; border: 1px solid #010e46; border-radius: 0.2em;" onclick="claimPageCompletedForm({{ $claims_CompletedForm_MainMember->mm_id }})">
                                                     Edit Claims
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger show-confirm action" onclick="deleteMemberForm('claims '+{{ $claims_CompletedForm_MainMember->mm_id }})">
+                                                <button type="button" class="btn btn-sm show-confirm action" onclick="deleteMemberForm('claims '+{{ $claims_CompletedForm_MainMember->mm_id }})" style="margin-bottom: 0.5em; background:none;">
                                                     <i class="fa fa-trash fa-lg"></i>
                                                 </button>
                                             </td>
@@ -173,28 +173,6 @@
                     </script>
 
                 </div> <!-- end content -->
-
-
-
-                <!-- Footer Start -->
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Tshitshithe.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-end d-none d-sm-block">
-                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Tendani ICT
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-                <!-- end Footer -->
-
-            </div>
-
             <!-- ============================================================== -->
             <!-- End Page content -->
             <!-- ============================================================== -->

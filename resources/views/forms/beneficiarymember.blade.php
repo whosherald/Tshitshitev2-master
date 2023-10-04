@@ -329,8 +329,7 @@
                         return response.json();
                         })
                         .then(function(response) {
-                        console.log('Beneficiary member update', response);
-                        window.location.href = '/member-capture';
+                            window.location.href = '/member-capture';
                         })
                         .catch(function(error) {
                         console.log(error);

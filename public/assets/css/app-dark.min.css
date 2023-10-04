@@ -1,12 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap);
 html {
-    position: relative;
-    min-height: 100%
 }
 
 body {
-    padding-bottom: 60px;
-    overflow-x: hidden
+    bottom: 0;
+    overflow-x: hidden;
 }
 
 .metismenu {
@@ -38,11 +36,11 @@ body {
     -webkit-transition-duration: .35s;
     transition-duration: .35s;
     -webkit-transition-property: height, visibility;
-    transition-property: height, visibility
+    transition-property: height, visibility;
 }
 
 .nav-second-level li a,
-.nav-thrid-level li a {
+ .nav-thrid-level li a {
     padding: 8px 20px;
     color: #929fbf;
     display: block;
@@ -63,32 +61,26 @@ body {
     color: #d6e5f7
 }
 
-#wrapper {
-    height: 100%;
+ #wrapper {
     overflow: hidden;
     width: 100%
 }
 
 .content-page {
-    margin-left: 240px;
-    overflow: hidden;
-    padding: 0 15px 5px 15px;
-    min-height: 80vh;
-    margin-top: 70px
+    /* margin-left: 240px; */
+    /* overflow-y: hidden; */
+    /* padding: 0 15px 5px 15px; */
 }
 
 .left-side-menu {
     width: 240px;
-    background: #343b4a;
     bottom: 0;
     padding: 20px 0;
-    position: fixed;
     -webkit-transition: all .2s ease-out;
     transition: all .2s ease-out;
-    top: 70px;
+    top: 0px;
     -webkit-box-shadow: 0 0 35px 0 rgba(0, 0, 0, .15);
     box-shadow: 0 0 35px 0 rgba(0, 0, 0, .15);
-    z-index: 1
 }
 
 #sidebar-menu>ul>li>a {
@@ -104,8 +96,8 @@ body {
 #sidebar-menu>ul>li>a:active,
 #sidebar-menu>ul>li>a:focus,
 #sidebar-menu>ul>li>a:hover {
-    color: #c8cddc;
-    text-decoration: none
+    color: #ffffff;
+    text-decoration: none;
 }
 
 #sidebar-menu>ul>li>a i {
@@ -126,7 +118,7 @@ body {
 }
 
 #sidebar-menu>ul>li>a.active {
-    background-color: #3c4556;
+    /* background-color: #3c4556; */
     color: #d6e5f7
 }
 
@@ -315,14 +307,6 @@ body {
     color: #d6e5f7
 }
 
-.enlarged .content-page {
-    margin-left: 70px !important
-}
-
-.enlarged .footer {
-    left: 70px !important
-}
-
 .enlarged .user-box {
     display: none
 }
@@ -334,7 +318,7 @@ body.enlarged {
 @media (max-width:767.98px) {
     body {
         overflow-x: hidden;
-        padding-bottom: 80px
+        /* padding-bottom: 80px */
     }
     .left-side-menu {
         display: none;
@@ -403,11 +387,6 @@ body.enlarged {
     color: #64b0f2
 }
 
-.enlarged.left-side-menu-dark #wrapper .navbar-custom {
-    -webkit-box-shadow: 70px 1px 0 0 #343b4a;
-    box-shadow: 70px 1px 0 0 #343b4a
-}
-
 .enlarged.left-side-menu-dark #wrapper .left-side-menu #sidebar-menu>ul>li:hover>a {
     background-color: #f8f9fa
 }
@@ -455,12 +434,8 @@ body.enlarged {
     display: none !important
 }
 
-.left-side-menu-sm .left-side-menu+.content-page {
-    margin-left: 160px
-}
-
 .left-side-menu-sm .left-side-menu+.content-page .footer {
-    left: 160px
+    /* left: 160px */
 }
 
 .enlarged.left-side-menu-sm #wrapper .left-side-menu {
@@ -519,29 +494,6 @@ body.enlarged {
     display: none
 }
 
-.navbar-custom {
-    background-color: #393f50;
-    padding: 0 10px 0 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    height: 70px;
-    z-index: 100
-}
-
-.navbar-custom .topnav-menu>li {
-    float: left
-}
-
-.navbar-custom .topnav-menu .nav-link {
-    padding: 0 15px;
-    color: #7f88a0;
-    min-width: 32px;
-    display: block;
-    line-height: 70px;
-    text-align: center;
-    max-height: 70px
-}
 
 .navbar-custom .dropdown.show .nav-link {
     background-color: rgba(255, 255, 255, .05)
@@ -722,18 +674,6 @@ body.enlarged {
     width: 32px
 }
 
-@media (min-width:1025px) {
-    .navbar-custom .button-menu-mobile {
-        margin-left: 8px
-    }
-}
-
-.topbar-light .navbar-custom {
-    background-color: #393f50;
-    -webkit-box-shadow: 240px 1px 0 0 #343b4a;
-    box-shadow: 240px 1px 0 0 #343b4a
-}
-
 .topbar-light .navbar-custom .topnav-menu .nav-link {
     color: #8a93a9
 }
@@ -800,18 +740,18 @@ body.enlarged {
 }
 
 .footer {
-    bottom: 0;
+    /* bottom: 0; */
     padding: 21px 15px 20px;
-    position: absolute;
-    right: 0;
-    color: #8a93a9;
-    left: 240px;
-    background-color: #252934
+    /* position: absolute; */
+    /* right: 0; */
+    /* color: #8a93a9; */
+    /* left: 240px; */
+    /* background-color: #252934 */
 }
 
 @media (max-width:767.98px) {
     .footer {
-        left: 0 !important;
+        /* left: 0 !important; */
         text-align: center
     }
 }
@@ -940,30 +880,24 @@ body.boxed-layout {
 }
 
 body.boxed-layout #wrapper {
-    background-color: #2c313e;
+    /* background-color: #2c313e; */
     max-width: 1300px;
     margin: 0 auto;
     -webkit-box-shadow: 0 0 35px 0 rgba(0, 0, 0, .15);
     box-shadow: 0 0 35px 0 rgba(0, 0, 0, .15)
 }
 
-body.boxed-layout .navbar-custom {
-    max-width: 1300px;
-    margin: 0 auto
-}
-
 body.boxed-layout .footer {
-    margin: 0 auto;
-    max-width: calc(1300px - 240px)
+    /* margin: 0 auto; */
+    /* max-width: calc(1300px - 240px) */
 }
 
 body.boxed-layout.enlarged .footer {
-    max-width: calc(1300px - 70px)
+    /* max-width: calc(1300px - 70px) */
 }
 
 @media (min-width:992px) {
-    .unsticky-layout .left-side-menu,
-    .unsticky-layout .navbar-custom {
+    .unsticky-layout .left-side-menu{
         position: absolute
     }
 }
@@ -1583,10 +1517,10 @@ body.boxed-layout.enlarged .footer {
 
 /*!
  * Waves v0.7.6
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE */
 
 .waves-effect {
@@ -3031,12 +2965,12 @@ table.dataTable {
 
 table.dataTable tbody>tr.selected,
 table.dataTable tbody>tr>.selected {
-    background-color: #64b0f2
+    background-color: #010e46
 }
 
 table.dataTable tbody>tr.selected td,
 table.dataTable tbody>tr>.selected td {
-    border-color: #64b0f2
+    border-color: #010e46
 }
 
 table.dataTable tbody td:focus {
@@ -3045,9 +2979,9 @@ table.dataTable tbody td:focus {
 
 table.dataTable tbody td.focus,
 table.dataTable tbody th.focus {
-    outline: 2px solid #64b0f2 !important;
+    outline: 2px solid #010e46 !important;
     outline-offset: -1px;
-    color: #64b0f2;
+    color: #010e46;
     background-color: rgba(100, 176, 242, .15)
 }
 
